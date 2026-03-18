@@ -63,21 +63,21 @@ const AboutSection = () => {
   return (
     <section id="about" ref={sectionRef} className="section-padding bg-background">
       <div className="container mx-auto">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 xl:gap-20 items-center">
           <div className="about-content">
             <div className="section-header">
-              <p className="section-subtitle mb-3 text-lg md:text-xl font-bold">About Sukhrup Garden</p>
-              <h2 className="section-title mb-6 text-5xl md:text-6xl lg:text-7xl font-bold">A Legacy of Grandeur</h2>
+              <p className="section-subtitle mb-3 text-base sm:text-lg md:text-xl font-bold">About Sukhrup Garden</p>
+              <h2 className="section-title mb-6 text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold">A Legacy of Grandeur</h2>
             </div>
-            <div className="gold-divider !mx-0 mb-8" />
-            <p className="text-muted-foreground font-body leading-relaxed mb-6">
+            <div className="gold-divider !mx-0 mb-6 sm:mb-8" />
+            <p className="text-muted-foreground font-body leading-relaxed mb-4 sm:mb-6">
               Founded on the principles of hospitality and heritage, Sukhrup Garden has stood as a
               beacon of celebration for 24 years. We don't just provide a venue; we provide a
               canvas where your most cherished dreams are painted with strokes of elegance and tradition.
               Our legacy is built on thousands of successful stories and a reputation for unmatched
               excellence in every detail.
             </p>
-            <p className="about-text text-muted-foreground font-body leading-relaxed mb-6">
+            <p className="about-text text-muted-foreground font-body leading-relaxed mb-4 sm:mb-6">
               Our architectural design seamlessly blends the timeless charm of traditional Indian
               aesthetics with the sophisticated requirements of modern luxury. Every corner of our
               sprawling estate is meticulously maintained to provide the perfect backdrop for your
@@ -94,25 +94,25 @@ const AboutSection = () => {
             <img
               src={hero1}
               alt="Sukhrup Garden Grand Hall"
-              className="w-full h-[300px] md:h-[500px] object-cover shadow-[var(--shadow-elegant)]"
+              className="w-full h-64 sm:h-80 md:h-[300px] lg:h-[500px] object-cover shadow-[var(--shadow-elegant)]"
             />
-            <div className="absolute -bottom-6 -left-6 w-48 h-48 border-2 border-gold/30 hidden lg:block" />
-            <div className="absolute -top-6 -right-6 w-48 h-48 border-2 border-gold/30 hidden lg:block" />
+            <div className="absolute -bottom-4 -left-4 w-32 h-32 sm:w-48 sm:h-48 border-2 border-gold/30 hidden lg:block" />
+            <div className="absolute -top-4 -right-4 w-32 h-32 sm:w-48 sm:h-48 border-2 border-gold/30 hidden lg:block" />
           </div>
         </div>
 
         {/* Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-20">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mt-12 sm:mt-20">
           {stats.map((stat) => (
             <div
               key={stat.label}
-              className="stat-card text-center p-6 bg-card border border-border rounded-sm"
+              className="stat-card text-center p-4 sm:p-6 bg-card border border-border rounded-sm"
             >
-              <stat.icon className="w-8 h-8 text-gold mx-auto mb-3" />
-              <div className="font-display text-4xl font-bold text-primary mb-1">
+              <stat.icon className="w-6 h-6 sm:w-8 sm:h-8 text-gold mx-auto mb-2 sm:mb-3" />
+              <div className="font-display text-2xl sm:text-3xl md:text-4xl font-bold text-primary mb-1">
                 <span className="stat-number" data-target={stat.value}>{stat.value}</span>{stat.suffix}
               </div>
-              <div className="text-sm font-semibold uppercase tracking-[0.15em] text-muted-foreground font-body">
+              <div className="text-xs sm:text-sm font-semibold uppercase tracking-[0.15em] text-muted-foreground font-body">
                 {stat.label}
               </div>
             </div>

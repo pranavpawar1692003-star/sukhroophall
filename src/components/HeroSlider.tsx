@@ -105,25 +105,25 @@ const HeroSlider = () => {
       {/* Arrows */}
       <button
         onClick={() => goTo((current - 1 + slides.length) % slides.length)}
-        className="absolute left-4 top-1/2 -translate-y-1/2 text-cream/60 hover:text-gold transition-colors"
+        className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 text-cream/60 hover:text-gold transition-colors"
       >
-        <ChevronLeft size={40} />
+        <ChevronLeft size={24} sm:size={32} md:size={40} />
       </button>
       <button
         onClick={() => goTo((current + 1) % slides.length)}
-        className="absolute right-4 top-1/2 -translate-y-1/2 text-cream/60 hover:text-gold transition-colors"
+        className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 text-cream/60 hover:text-gold transition-colors"
       >
-        <ChevronRight size={40} />
+        <ChevronRight size={24} sm:size={32} md:size={40} />
       </button>
 
       {/* Dots */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-3">
+      <div className="absolute bottom-4 sm:bottom-6 md:bottom-8 left-1/2 -translate-x-1/2 flex gap-2 sm:gap-3">
         {slides.map((_, i) => (
           <button
             key={i}
             onClick={() => goTo(i)}
-            className={`w-3 h-3 rounded-full transition-all duration-300 ${
-              i === current ? "bg-gold w-8" : "bg-cream/40"
+            className={`w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full transition-all duration-300 ${
+              i === current ? "bg-gold w-6 sm:w-8" : "bg-cream/40"
             }`}
           />
         ))}

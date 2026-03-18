@@ -49,10 +49,10 @@ const ServicesSection = () => {
           </p>
         </div>
 
-        <div className="services-grid grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="services-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {services.map((s) => (
             <div key={s.title} className="service-card card-premium group cursor-pointer">
-              <div className="relative overflow-hidden h-56">
+              <div className="relative overflow-hidden h-48 sm:h-56">
                 <img
                   src={s.image}
                   alt={s.title}
@@ -60,11 +60,11 @@ const ServicesSection = () => {
                 />
                 <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/40 transition-all duration-300" />
               </div>
-              <div className="p-6">
-                <h3 className="font-display text-xl font-semibold text-foreground mb-2">
+              <div className="p-4 sm:p-6">
+                <h3 className="font-display text-lg sm:text-xl font-semibold text-foreground mb-2">
                   {s.title}
                 </h3>
-                <p className="text-muted-foreground font-body text-base leading-relaxed">
+                <p className="text-muted-foreground font-body text-sm sm:text-base leading-relaxed">
                   {s.desc}
                 </p>
               </div>

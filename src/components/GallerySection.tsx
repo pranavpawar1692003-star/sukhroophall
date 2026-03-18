@@ -80,20 +80,20 @@ const GallerySection = () => {
           </p>
         </div>
 
-        <div className="gallery-grid grid grid-cols-2 md:grid-cols-3 gap-4">
+        <div className="gallery-grid grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
           {images.map((item, i) => (
             <div
               key={i}
               onClick={() => openLightbox(i)}
               className={`gallery-item relative overflow-hidden cursor-pointer group ${
-                item.type === "video" ? "md:col-span-3" : i === 0 ? "md:col-span-2 md:row-span-2" : ""
+                item.type === "video" ? "col-span-2 sm:col-span-3" : i === 0 ? "sm:col-span-2 sm:row-span-2" : ""
               }`}
             >
               {item.type === "video" ? (
                 <div className="relative w-full">
                   <video
                     src={item.src}
-                    className="w-full h-64 md:h-96 object-cover rounded-lg"
+                    className="w-full h-48 sm:h-64 md:h-80 lg:h-96 object-cover rounded-lg"
                     poster={gallery1}
                     muted
                     autoPlay
@@ -101,7 +101,7 @@ const GallerySection = () => {
                     playsInline
                   />
                   <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/50 transition-all duration-300 flex items-end">
-                    <span className="text-cream font-body text-sm uppercase tracking-wider p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <span className="text-cream font-body text-xs sm:text-sm uppercase tracking-wider p-3 sm:p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                       {item.label}
                     </span>
                   </div>
@@ -112,11 +112,11 @@ const GallerySection = () => {
                     src={item.src}
                     alt={item.label}
                     className={`w-full object-cover transition-transform duration-500 group-hover:scale-110 ${
-                      i === 0 ? "h-full min-h-[300px] md:min-h-[500px]" : "h-48 md:h-56"
+                      i === 0 ? "h-full min-h-[200px] sm:min-h-[300px] md:min-h-[400px] lg:min-h-[500px]" : "h-32 sm:h-48 md:h-56"
                     }`}
                   />
                   <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/50 transition-all duration-300 flex items-end">
-                    <span className="text-cream font-body text-sm uppercase tracking-wider p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <span className="text-cream font-body text-xs sm:text-sm uppercase tracking-wider p-2 sm:p-3 md:p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                       {item.label}
                     </span>
                   </div>
@@ -130,14 +130,14 @@ const GallerySection = () => {
       {/* Lightbox */}
       {lightbox !== null && (
         <div
-          className="fixed inset-0 z-[100] bg-royal/95 flex items-center justify-center"
+          className="fixed inset-0 z-[100] bg-royal/95 flex items-center justify-center p-2 sm:p-4"
           onClick={closeLightbox}
         >
-          <button onClick={closeLightbox} className="absolute top-6 right-6 text-cream/70 hover:text-gold">
-            <X size={32} />
+          <button onClick={closeLightbox} className="absolute top-4 sm:top-6 right-4 sm:right-6 text-cream/70 hover:text-gold">
+            <X size={24} sm:size={32} />
           </button>
           {images[lightbox].type === "video" ? (
-            <div className="relative max-w-5xl w-full mx-4" onClick={(e) => e.stopPropagation()}>
+            <div className="relative w-full max-w-5xl mx-2 sm:mx-4" onClick={(e) => e.stopPropagation()}>
               <video
                 src={images[lightbox].src}
                 controls
@@ -145,7 +145,7 @@ const GallerySection = () => {
                 autoPlay
                 playsInline
               />
-              <p className="absolute bottom-6 left-0 right-0 text-center text-cream font-body text-sm uppercase tracking-wider">
+              <p className="absolute bottom-4 sm:bottom-6 left-0 right-0 text-center text-cream font-body text-xs sm:text-sm uppercase tracking-wider">
                 {images[lightbox].label}
               </p>
             </div>
@@ -153,23 +153,23 @@ const GallerySection = () => {
             <>
               <button
                 onClick={(e) => { e.stopPropagation(); navigate(-1); }}
-                className="absolute left-4 text-cream/70 hover:text-gold"
+                className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 text-cream/70 hover:text-gold"
               >
-                <ChevronLeft size={40} />
+                <ChevronLeft size={24} sm:size={40} />
               </button>
               <img
                 src={images[lightbox].src}
                 alt={images[lightbox].label}
-                className="max-w-[90vw] max-h-[85vh] object-contain"
+                className="max-w-[90vw] max-h-[80vh] sm:max-h-[85vh] object-contain rounded-lg"
                 onClick={(e) => e.stopPropagation()}
               />
               <button
                 onClick={(e) => { e.stopPropagation(); navigate(1); }}
-                className="absolute right-4 text-cream/70 hover:text-gold"
+                className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 text-cream/70 hover:text-gold"
               >
-                <ChevronRight size={40} />
+                <ChevronRight size={24} sm:size={40} />
               </button>
-              <p className="absolute bottom-6 text-cream font-body text-sm uppercase tracking-wider">
+              <p className="absolute bottom-4 sm:bottom-6 left-0 right-0 text-center text-cream font-body text-xs sm:text-sm uppercase tracking-wider">
                 {images[lightbox].label}
               </p>
             </>

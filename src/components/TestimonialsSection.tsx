@@ -99,31 +99,31 @@ const TestimonialsSection = () => {
 
         <div 
           ref={marqueeRef}
-          className="flex gap-8 whitespace-nowrap will-change-transform"
+          className="flex gap-4 sm:gap-6 md:gap-8 whitespace-nowrap will-change-transform"
           style={{ width: "max-content" }}
         >
           {duplicatedTestimonials.map((t, i) => (
             <div 
               key={i} 
-              className="testimonial-card inline-block w-[320px] sm:w-[400px] md:w-[500px] bg-white/5 backdrop-blur-sm p-6 sm:p-10 border border-gold/10 relative group hover:bg-white/10 transition-all duration-500 whitespace-normal"
+              className="testimonial-card inline-block w-[280px] sm:w-[320px] md:w-[400px] lg:w-[500px] bg-white/5 backdrop-blur-sm p-4 sm:p-6 md:p-10 border border-gold/10 relative group hover:bg-white/10 transition-all duration-500 whitespace-normal"
             >
-              <Quote className="absolute top-6 right-6 w-8 h-8 text-gold/20 group-hover:text-gold/40 transition-colors" />
+              <Quote className="absolute top-4 right-4 w-6 h-6 sm:w-8 sm:h-8 text-gold/20 group-hover:text-gold/40 transition-colors" />
               
-              <div className="flex gap-1 mb-6">
+              <div className="flex gap-1 mb-4 sm:mb-6">
                 {Array.from({ length: t.rating }).map((_, i) => (
-                  <Star key={i} className="w-4 h-4 text-gold fill-gold" />
+                  <Star key={i} className="w-3 h-3 sm:w-4 sm:h-4 text-gold fill-gold" />
                 ))}
               </div>
 
-              <p className="font-body text-cream/90 text-base md:text-lg leading-relaxed mb-10 italic relative z-10">
+              <p className="font-body text-cream/90 text-xs sm:text-sm md:text-base leading-relaxed mb-6 sm:mb-10 italic relative z-10">
                 "{t.text}"
               </p>
 
-              <div className="mt-auto border-t border-gold/10 pt-6">
-                <p className="font-display text-xl font-bold text-gold mb-1">
+              <div className="mt-auto border-t border-gold/10 pt-4 sm:pt-6">
+                <p className="font-display text-lg sm:text-xl font-bold text-gold mb-1">
                   {t.name}
                 </p>
-                <p className="text-cream/60 text-xs uppercase tracking-[0.2em] font-body">
+                <p className="text-cream/60 text-[10px] sm:text-xs uppercase tracking-[0.2em] font-body">
                   {t.event}
                 </p>
               </div>
