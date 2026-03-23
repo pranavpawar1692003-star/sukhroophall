@@ -9,7 +9,7 @@ const BookingBanner = () => {
   const ref = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
+    const ctx = gsap.context(() => { 
       gsap.from(".banner-content > *", {
         scrollTrigger: { trigger: ref.current, start: "top 85%" },
         opacity: 0, y: 20, duration: 0.6, stagger: 0.1,
@@ -43,7 +43,7 @@ const BookingBanner = () => {
             className="inline-flex items-center justify-center gap-2 px-8 py-3 border-2 border-royal text-royal font-body font-medium text-sm uppercase tracking-[0.15em] transition-all duration-300 hover:bg-royal hover:text-cream"
           >
             <Phone size={16} />
-            +91 7304999009
+            +91 73049 99009
           </a>
         </div>
       </div>

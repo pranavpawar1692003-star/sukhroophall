@@ -119,7 +119,7 @@ const FacilitiesSection = () => {
                       {fact}
                     </p>
                   </li>
-                ))}
+                ))} 
               </ul>
               <div className="mt-8 sm:mt-10">
                 <a
@@ -134,7 +134,8 @@ const FacilitiesSection = () => {
         </div>
       </div>
     </section>
-  );
+  );          
 };
 
 export default FacilitiesSection;
+  

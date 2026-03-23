@@ -9,6 +9,7 @@ import TestimonialsSection from "@/components/TestimonialsSection";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
 import SocialFloatingSidebar from "@/components/SocialFloatingSidebar";
+import WhatsAppFloating from "@/components/WhatsAppFloating";
 
 import { useEffect } from "react";
 
@@ -35,6 +36,7 @@ const Index = () => {
     <ContactSection />
     <Footer />
     <SocialFloatingSidebar />
+    <WhatsAppFloating />
     </main>
   );
 };
