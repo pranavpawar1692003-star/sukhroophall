@@ -2,23 +2,13 @@ import { useState, useEffect } from "react";
 import { MessageCircle } from "lucide-react";
 
 const WhatsAppFloating = () => {
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    // Show after slight delay for a nice entry
-    const timer = setTimeout(() => setIsVisible(true), 1500);
-    return () => clearTimeout(timer);
-  }, []);
-
   const phoneNumber = "917304999009"; 
   const message = "Hello! I'm interested in booking Sukhrup Garden for an event. Can you please provide more details?";
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
 
   return (
     <div
-      className={`fixed bottom-4 sm:bottom-8 right-4 sm:right-8 z-[60] transition-all duration-500 transform ${
-        isVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
-      }`}
+      className="fixed bottom-4 sm:bottom-8 right-4 sm:right-8 z-[60]"
     >
       <a
         href={whatsappUrl}

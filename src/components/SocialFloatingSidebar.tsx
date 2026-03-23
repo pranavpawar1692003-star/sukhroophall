@@ -2,19 +2,9 @@ import { useState, useEffect } from "react";
 import { Facebook, Instagram, MessageCircle } from "lucide-react";
 
 const SocialFloatingSidebar = () => {
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    // Show after slight delay for a nice entry
-    const timer = setTimeout(() => setIsVisible(true), 2000);
-    return () => clearTimeout(timer);
-  }, []);
-
   return (
     <div
-      className={`fixed right-2 sm:right-4 top-1/2 -translate-y-1/2 z-[50] flex flex-col gap-2 p-2 transition-all duration-700 transform ${
-        isVisible ? "translate-x-0 opacity-100" : "translate-x-10 opacity-0"
-      }`}
+      className="fixed right-2 sm:right-4 top-1/2 -translate-y-1/2 z-[50] flex flex-col gap-2 p-2"
     >
       <a
         href="https://www.facebook.com/share/17Bqq55zPE/"
