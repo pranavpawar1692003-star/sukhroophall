@@ -23,10 +23,7 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled
-          ? "bg-royal/95 backdrop-blur-md shadow-lg py-3"
-          : "bg-transparent py-5"
-        }`}
+      className="fixed top-0 left-0 right-0 z-50 bg-royal/95 backdrop-blur-md shadow-lg py-3"
     >
       <div className="w-full px-4 sm:px-6 md:px-10 lg:px-12 xl:px-16 flex items-center justify-between">
         <a href="#home" className="flex flex-col">
