@@ -24,7 +24,7 @@ const WhatsAppFloating = () => {
         {/* Pulsing effect */}
         <span className="absolute inset-0 rounded-full bg-[#25D366] animate-ping opacity-25 group-hover:opacity-0 transition-opacity" />
         
-        <MessageCircle size={20} sm:size={32} />
+        <MessageCircle className="w-5 h-5 sm:w-8 sm:h-8" />
       </a>
     </div>
   );
