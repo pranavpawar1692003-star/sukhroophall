@@ -135,54 +135,61 @@ const AdminAbout = () => {
               </button>
             </div>
 
-            <div className="space-y-3">
-              {formData.stats.map((stat, i) => (
-                <div key={i} className="grid grid-cols-12 gap-2 bg-white/5 p-3 rounded-lg">
-                  <div className="col-span-3">
-                    <input
-                      type="text"
-                      value={stat.icon}
-                      onChange={(e) => handleStatChange(i, "icon", e.target.value)}
-                      placeholder="Icon"
-                      className="w-full px-2 py-1 bg-white/10 border border-gold/30 rounded text-sm"
-                    />
+              <div className="space-y-4">
+                {formData.stats.map((stat, i) => (
+                  <div key={i} className="flex flex-col sm:flex-row gap-3 bg-white/5 p-4 rounded-xl border border-gold/10 relative">
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 flex-1">
+                      <div>
+                        <p className="text-[10px] text-gold font-bold uppercase mb-1">Icon</p>
+                        <input
+                          type="text"
+                          value={stat.icon}
+                          onChange={(e) => handleStatChange(i, "icon", e.target.value)}
+                          placeholder="Calendar"
+                          className="w-full px-3 py-2 bg-white/5 border border-gold/20 rounded-lg text-sm text-white"
+                        />
+                      </div>
+                      <div>
+                        <p className="text-[10px] text-gold font-bold uppercase mb-1">Value</p>
+                        <input
+                          type="number"
+                          value={stat.value}
+                          onChange={(e) => handleStatChange(i, "value", parseInt(e.target.value))}
+                          placeholder="24"
+                          className="w-full px-3 py-2 bg-white/5 border border-gold/20 rounded-lg text-sm text-white"
+                        />
+                      </div>
+                      <div>
+                        <p className="text-[10px] text-gold font-bold uppercase mb-1">Suffix</p>
+                        <input
+                          type="text"
+                          value={stat.suffix}
+                          onChange={(e) => handleStatChange(i, "suffix", e.target.value)}
+                          placeholder="+"
+                          className="w-full px-3 py-2 bg-white/5 border border-gold/20 rounded-lg text-sm text-white"
+                        />
+                      </div>
+                      <div>
+                        <p className="text-[10px] text-gold font-bold uppercase mb-1">Label</p>
+                        <input
+                          type="text"
+                          value={stat.label}
+                          onChange={(e) => handleStatChange(i, "label", e.target.value)}
+                          placeholder="Excellence"
+                          className="w-full px-3 py-2 bg-white/5 border border-gold/20 rounded-lg text-sm text-white"
+                        />
+                      </div>
+                    </div>
+                    <button
+                      onClick={() => handleRemoveStat(i)}
+                      className="absolute -top-2 -right-2 sm:static flex items-center justify-center p-2 text-red-400 bg-red-500/10 hover:bg-red-500 hover:text-white rounded-full sm:rounded-lg transition-colors border border-red-500/20 sm:border-0"
+                    >
+                      <Trash2 className="w-4 h-4" />
+                    </button>
                   </div>
-                  <div className="col-span-3">
-                    <input
-                      type="number"
-                      value={stat.value}
-                      onChange={(e) => handleStatChange(i, "value", parseInt(e.target.value))}
-                      placeholder="Value"
-                      className="w-full px-2 py-1 bg-white/10 border border-gold/30 rounded text-sm"
-                    />
-                  </div>
-                  <div className="col-span-2">
-                    <input
-                      type="text"
-                      value={stat.suffix}
-                      onChange={(e) => handleStatChange(i, "suffix", e.target.value)}
-                      placeholder="Suffix"
-                      className="w-full px-2 py-1 bg-white/10 border border-gold/30 rounded text-sm"
-                    />
-                  </div>
-                  <div className="col-span-3">
-                    <input
-                      type="text"
-                      value={stat.label}
-                      onChange={(e) => handleStatChange(i, "label", e.target.value)}
-                      placeholder="Label"
-                      className="w-full px-2 py-1 bg-white/10 border border-gold/30 rounded text-sm"
-                    />
-                  </div>
-                  <button
-                    onClick={() => handleRemoveStat(i)}
-                    className="col-span-1 flex items-center justify-center text-red-400 hover:bg-red-500/20 rounded"
-                  >
-                    <Trash2 className="w-4 h-4" />
-                  </button>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+
           </div>
 
           <button

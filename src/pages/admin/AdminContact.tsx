@@ -169,33 +169,36 @@ const AdminContact = () => {
             </div>
             <div className="space-y-3">
               {formData.socialMedia.map((social, i) => (
-                <div key={i} className="grid grid-cols-12 gap-2 bg-white/5 p-3 rounded-lg">
-                  <div className="col-span-3">
+                <div key={i} className="flex flex-col sm:flex-row gap-3 bg-white/5 p-4 rounded-xl border border-gold/10 relative">
+                  <div className="w-full sm:w-1/3">
+                    <p className="text-[10px] text-gold font-bold uppercase mb-1 sm:hidden">Platform</p>
                     <input
                       type="text"
                       value={social.platform}
                       onChange={(e) => handleSocialChange(i, "platform", e.target.value)}
-                      placeholder="Platform"
-                      className="w-full px-2 py-1 bg-white/10 border border-gold/30 rounded text-sm text-white"
+                      placeholder="e.g. Instagram"
+                      className="w-full px-3 py-2 bg-white/5 border border-gold/20 rounded-lg text-sm text-white focus:outline-none focus:border-gold"
                     />
                   </div>
-                  <div className="col-span-8">
+                  <div className="w-full sm:flex-1">
+                    <p className="text-[10px] text-gold font-bold uppercase mb-1 sm:hidden">URL</p>
                     <input
                       type="text"
                       value={social.url}
                       onChange={(e) => handleSocialChange(i, "url", e.target.value)}
-                      placeholder="URL"
-                      className="w-full px-2 py-1 bg-white/10 border border-gold/30 rounded text-sm text-white"
+                      placeholder="https://..."
+                      className="w-full px-3 py-2 bg-white/5 border border-gold/20 rounded-lg text-sm text-white focus:outline-none focus:border-gold"
                     />
                   </div>
                   <button
                     onClick={() => handleRemoveSocial(i)}
-                    className="col-span-1 flex items-center justify-center text-red-400 hover:bg-red-500/20 rounded"
+                    className="absolute -top-2 -right-2 sm:relative sm:top-0 sm:right-0 flex items-center justify-center p-2 text-red-400 bg-red-500/10 hover:bg-red-500 hover:text-white rounded-full sm:rounded-lg transition-colors border border-red-500/20 sm:border-0"
                   >
                     <Trash2 className="w-4 h-4" />
                   </button>
                 </div>
               ))}
+
             </div>
           </div>
           <button

@@ -243,32 +243,35 @@ const AdminTestimonials = () => {
                 </div>
               </div>
             ) : (
-              <div className="flex gap-4 items-start">
-                <div className="flex-1">
+              <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
+                <div className="flex-1 w-full">
                   <h4 className="font-display text-lg font-bold text-gold">{testimonial.name}</h4>
                   <p className="text-cream/70 text-sm">{testimonial.event}</p>
-                  <p className="text-cream/60 text-sm mt-2 italic">"{testimonial.comment}"</p>
-                  <div className="text-gold mt-2">
+                  <p className="text-cream/60 text-sm mt-2 italic leading-relaxed">"{testimonial.comment}"</p>
+                  <div className="text-gold mt-2 flex gap-0.5">
                     {"★".repeat(testimonial.rating)}
                     <span className="text-cream/30">{"★".repeat(5 - testimonial.rating)}</span>
                   </div>
                 </div>
-                <div className="flex gap-1 sm:gap-2">
+                <div className="flex w-full sm:w-auto justify-end gap-2 mt-4 sm:mt-0 p-2 sm:p-0 bg-white/5 sm:bg-transparent rounded-lg">
                   <button
                     onClick={() => handleStartEdit(testimonial)}
-                    className="p-2 sm:p-2.5 bg-white/10 text-cream rounded-lg hover:bg-white/20 transition-colors"
+                    className="flex-1 sm:flex-none p-2.5 bg-white/10 text-cream rounded-lg hover:bg-white/20 transition-colors flex items-center justify-center min-w-[44px]"
                   >
-                    <Edit2 className="w-5 h-5" />
+                    <Edit2 className="w-5 h-5 mr-2 sm:mr-0" />
+                    <span className="sm:hidden text-sm uppercase font-bold">Edit</span>
                   </button>
                   <button
                     onClick={() => handleDelete(testimonial.id!)}
                     disabled={!testimonial.id || loading}
-                    className="p-2 sm:p-2.5 bg-red-500/20 text-red-500 rounded-lg hover:bg-red-500/30 disabled:opacity-30 transition-colors"
+                    className="flex-1 sm:flex-none p-2.5 bg-red-500/20 text-red-500 rounded-lg hover:bg-red-500/30 disabled:opacity-30 transition-colors flex items-center justify-center min-w-[44px]"
                   >
-                    <Trash2 className="w-5 h-5" />
+                    <Trash2 className="w-5 h-5 mr-2 sm:mr-0" />
+                    <span className="sm:hidden text-sm uppercase font-bold">Delete</span>
                   </button>
                 </div>
               </div>
+
             )}
           </div>
         ))}

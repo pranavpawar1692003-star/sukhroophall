@@ -274,32 +274,37 @@ const AdminFacilities = () => {
                     </div>
                   </div>
                 ) : (
-                  <div className="flex gap-4 items-center">
-                    <div className="w-10 h-10 rounded-full bg-gold/20 flex items-center justify-center flex-shrink-0">
-                      <IconComponent className="w-5 h-5 text-gold" />
+                  <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
+                    <div className="flex items-center gap-4 flex-1">
+                      <div className="w-10 h-10 rounded-full bg-gold/20 flex items-center justify-center flex-shrink-0 border border-gold/10 shadow-[0_0_15px_rgba(212,175,55,0.1)]">
+                        <IconComponent className="w-5 h-5 text-gold" />
+                      </div>
+                      <div className="flex-1">
+                        <h4 className="font-display font-bold text-gold text-sm sm:text-base">{facility.title}</h4>
+                        <p className="text-cream/70 text-xs sm:text-sm line-clamp-1">{facility.desc}</p>
+                      </div>
                     </div>
-                    <div className="flex-1">
-                      <h4 className="font-display font-bold text-gold text-sm">{facility.title}</h4>
-                      <p className="text-cream/70 text-xs line-clamp-1">{facility.desc}</p>
-                    </div>
-                    <div className="flex gap-1 sm:gap-2">
+                    <div className="flex w-full sm:w-auto justify-end gap-2 mt-2 sm:mt-0 pt-2 sm:pt-0 border-t sm:border-t-0 border-gold/10">
                       <button 
                         onClick={() => handleStartEdit(facility)} 
-                        className="p-2 sm:p-2.5 bg-white/10 text-cream rounded-lg hover:bg-white/20 transition-colors"
+                        className="flex-1 sm:flex-none p-2.5 bg-white/10 text-cream rounded-lg hover:bg-white/20 transition-colors flex items-center justify-center min-w-[44px]"
                         title="Edit Facility"
                       >
-                        <Edit2 className="w-5 h-5" />
+                        <Edit2 className="w-5 h-5 mr-2 sm:mr-0" />
+                        <span className="sm:hidden text-xs uppercase font-bold">Edit</span>
                       </button>
                       <button 
                         onClick={() => handleDelete(facility.id!)} 
                         disabled={!facility.id || loading}
-                        className="p-2 sm:p-2.5 bg-red-500/20 text-red-500 rounded-lg hover:bg-red-500/30 disabled:opacity-30 transition-colors"
+                        className="flex-1 sm:flex-none p-2.5 bg-red-500/20 text-red-500 rounded-lg hover:bg-red-500/30 disabled:opacity-30 transition-colors flex items-center justify-center min-w-[44px]"
                         title="Delete Facility"
                       >
-                        <Trash2 className="w-5 h-5" />
+                        <Trash2 className="w-5 h-5 mr-2 sm:mr-0" />
+                        <span className="sm:hidden text-xs uppercase font-bold">Delete</span>
                       </button>
                     </div>
                   </div>
+
                 )}
               </div>
             );
@@ -334,34 +339,42 @@ const AdminFacilities = () => {
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 {extrasData.technicalExcellence.map((tech, i) => (
-                  <div key={i} className="flex gap-2 items-center bg-white/5 p-2 rounded border border-gold/10">
-                    <input
-                      type="text"
-                      placeholder="Label"
-                      value={tech.label}
-                      onChange={(e) => {
-                        const newTech = [...extrasData.technicalExcellence];
-                        newTech[i].label = e.target.value;
-                        setExtrasData({ ...extrasData, technicalExcellence: newTech });
-                      }}
-                      className="flex-1 bg-transparent border-b border-gold/20 text-xs text-white p-1 focus:outline-none focus:border-gold"
-                    />
-                    <input
-                      type="text"
-                      placeholder="Value"
-                      value={tech.value}
-                      onChange={(e) => {
-                        const newTech = [...extrasData.technicalExcellence];
-                        newTech[i].value = e.target.value;
-                        setExtrasData({ ...extrasData, technicalExcellence: newTech });
-                      }}
-                      className="flex-1 bg-transparent border-b border-gold/20 text-xs text-gold p-1 focus:outline-none focus:border-gold"
-                    />
+                  <div key={i} className="flex flex-col sm:flex-row gap-3 bg-white/5 p-4 rounded-xl border border-gold/10 relative group">
+                    <div className="flex-1 space-y-3 sm:space-y-0 sm:flex sm:gap-3">
+                      <div className="flex-1">
+                        <p className="text-[10px] text-gold font-bold uppercase mb-1 sm:hidden">Label</p>
+                        <input
+                          type="text"
+                          placeholder="e.g. Area"
+                          value={tech.label}
+                          onChange={(e) => {
+                            const newTech = [...extrasData.technicalExcellence];
+                            newTech[i].label = e.target.value;
+                            setExtrasData({ ...extrasData, technicalExcellence: newTech });
+                          }}
+                          className="w-full bg-white/5 border border-gold/20 text-sm text-white p-2 rounded-lg focus:outline-none focus:border-gold"
+                        />
+                      </div>
+                      <div className="flex-1">
+                        <p className="text-[10px] text-gold font-bold uppercase mb-1 sm:hidden">Value</p>
+                        <input
+                          type="text"
+                          placeholder="e.g. 5 Acres"
+                          value={tech.value}
+                          onChange={(e) => {
+                            const newTech = [...extrasData.technicalExcellence];
+                            newTech[i].value = e.target.value;
+                            setExtrasData({ ...extrasData, technicalExcellence: newTech });
+                          }}
+                          className="w-full bg-white/5 border border-gold/20 text-sm text-gold p-2 rounded-lg focus:outline-none focus:border-gold"
+                        />
+                      </div>
+                    </div>
                     <button
                       onClick={() => setExtrasData({ ...extrasData, technicalExcellence: extrasData.technicalExcellence.filter((_, idx) => idx !== i) })}
-                      className="text-red-400 hover:text-red-500"
+                      className="absolute -top-2 -right-2 sm:static bg-red-500/10 hover:bg-red-500 text-red-400 hover:text-white p-1.5 rounded-full transition-colors border border-red-500/20"
                     >
-                      <Trash2 className="w-3 h-3" />
+                      <Trash2 className="w-4 h-4" />
                     </button>
                   </div>
                 ))}
@@ -415,9 +428,9 @@ const AdminFacilities = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="bg-white/5 border border-gold/10 rounded-lg p-6">
               <h4 className="text-gold font-bold mb-4 flex items-center gap-2"><Check className="w-4 h-4" /> Technical Excellence</h4>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {extrasData.technicalExcellence.map((tech, i) => (
-                  <div key={i} className="border-l-2 border-gold/50 pl-3">
+                  <div key={i} className="bg-white/5 p-3 rounded-lg border border-gold/10 sm:border-0 sm:bg-transparent sm:border-l-2 sm:border-gold/50 sm:pl-3">
                     <p className="text-[10px] text-cream/50 uppercase">{tech.label}</p>
                     <p className="text-sm font-bold text-white">{tech.value}</p>
                   </div>

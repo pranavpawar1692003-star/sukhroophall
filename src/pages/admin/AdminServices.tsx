@@ -290,30 +290,33 @@ const AdminServices = () => {
                 </div>
               </div>
             ) : (
-              <div className="flex gap-4 items-start">
-                <div className="w-24 h-16 flex-shrink-0">
+              <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
+                <div className="w-full sm:w-24 h-40 sm:h-16 flex-shrink-0">
                   <img src={service.image} alt={service.title} className="w-full h-full object-cover rounded-lg" />
                 </div>
                 <div className="flex-1">
                   <h4 className="font-display text-lg font-bold text-gold">{service.title}</h4>
-                  <p className="text-cream/70 text-sm mt-1">{service.desc}</p>
+                  <p className="text-cream/70 text-sm mt-1 line-clamp-2 sm:line-clamp-none">{service.desc}</p>
                 </div>
-                <div className="flex gap-1 sm:gap-2">
+                <div className="flex w-full sm:w-auto justify-end gap-2 mt-2 sm:mt-0">
                   <button
                     onClick={() => handleStartEdit(service)}
-                    className="p-2 sm:p-2.5 bg-white/10 text-cream rounded-lg hover:bg-white/20 transition-colors"
+                    className="flex-1 sm:flex-none p-2.5 bg-white/10 text-cream rounded-lg hover:bg-white/20 transition-colors flex items-center justify-center"
                   >
-                    <Edit2 className="w-5 h-5" />
+                    <Edit2 className="w-5 h-5 mr-2 sm:mr-0" />
+                    <span className="sm:hidden text-sm uppercase font-bold">Edit</span>
                   </button>
                   <button
                     onClick={() => handleDelete(service.id!)}
                     disabled={!service.id || loading}
-                    className="p-2 sm:p-2.5 bg-red-500/20 text-red-500 rounded-lg hover:bg-red-500/30 disabled:opacity-30 transition-colors"
+                    className="flex-1 sm:flex-none p-2.5 bg-red-500/20 text-red-500 rounded-lg hover:bg-red-500/30 disabled:opacity-30 transition-colors flex items-center justify-center"
                   >
-                    <Trash2 className="w-5 h-5" />
+                    <Trash2 className="w-5 h-5 mr-2 sm:mr-0" />
+                    <span className="sm:hidden text-sm uppercase font-bold">Delete</span>
                   </button>
                 </div>
               </div>
+
             )}
           </div>
         ))}
