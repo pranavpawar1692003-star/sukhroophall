@@ -2,25 +2,45 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import {
-  Snowflake, Car, UtensilsCrossed, BedDouble, Theater, Zap, Lock, Coffee, Users
+  Snowflake, Car, UtensilsCrossed, BedDouble, Theater, Zap, Lock, Coffee, Users, Utensils, Star, Info
 } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const facilities = [
-  { icon: Snowflake, title: "AC Banquet Hall", desc: "Our majestic, pillar-less ballroom features centralized climate control, accommodating up to 500 guests in a truly royal setting with exquisite chandeliers." },
-  { icon: Car, title: "Parking", desc: "Stress-free arrival for your guests with our expansive parking facility for 200+ vehicles, managed by a professional and courteous valet team." },
-  { icon: UtensilsCrossed, title: "Grand Dining Hall", desc: "A sprawling, separate dining area designed for comfort, featuring custom buffet setups and live counter spaces to suit every culinary preference." },
-  { icon: BedDouble, title: "Luxury Guest Rooms", desc: "12 opulent guest suites featuring premium linens, modern attached bathrooms, and traditional aesthetic touches for your family's comfort." },
-  { icon: Theater, title: "Designer Stage", desc: "A massive, custom-built performance stage equipped with programmable LED ambient lighting and cinematic acoustics for a spectacular visual experience." },
-  { icon: Zap, title: "Uninterrupted Power", desc: "Dual industrial-grade silent generators ensure your celebrations continue flawlessly with 100% power backup for all lighting and AC systems." },
-  { icon: Lock, title: "Elite Security", desc: "Peace of mind with 24/7 CCTV surveillance and a team of professional security personnel monitoring all entrances and common areas." },
-  { icon: Coffee, title: "Pre-Function Area", desc: "An elegant lounge space for early arrivals, perfect for welcome drinks and intimate conversations before the main event begins." },
-  { icon: Users, title: "Bridal Suites", desc: "Private, high-security mirror-lined changing rooms with dedicated restrooms, designed specifically for the bridal party's comfort and privacy." },
-];
+import { useData } from "@/contexts/DataContext";
+
+const iconMap: { [key: string]: any } = {
+  Snowflake,
+  Car,
+  UtensilsCrossed,
+  BedDouble,
+  Theater,
+  Zap,
+  Lock,
+  Coffee,
+  Users,
+  Utensils,
+  Star,
+  Info
+};
 
 const FacilitiesSection = () => {
+  const { facilities, facilityExtras } = useData();
   const sectionRef = useRef<HTMLElement>(null);
+
+  const technicalExcellence = facilityExtras?.technicalExcellence || [
+    "Centralized VRF AC Systems",
+    "Professional Acoustic Treatment",
+    "Programmable LED Ambience",
+    "High-Resolution CCTV Matrix"
+  ];
+
+  const specifications = facilityExtras?.specifications || [
+    "25,000 Sq. Ft. Operational Area",
+    "1,500 Guest Combined Capacity",
+    "200+ Vehicle Secured Parking",
+    "100% DG Set Power Backup"
+  ];
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -55,19 +75,22 @@ const FacilitiesSection = () => {
         </div>
 
         <div className="facility-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-12">
-          {facilities.map((f) => (
-            <div key={f.title} className="facility-card card-premium p-6 sm:p-8 text-left group">
-              <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-gold/10 flex items-center justify-center mb-4 sm:mb-5 group-hover:bg-gold/20 transition-colors duration-300">
-                <f.icon className="w-6 h-6 sm:w-7 sm:h-7 text-gold" />
+          {facilities.map((f: any) => {
+            const IconComponent = typeof f.icon === 'string' ? (iconMap[f.icon] || Info) : f.icon;
+            return (
+              <div key={f.title} className="facility-card card-premium p-6 sm:p-8 text-left group">
+                <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-gold/10 flex items-center justify-center mb-4 sm:mb-5 group-hover:bg-gold/20 transition-colors duration-300">
+                  <IconComponent className="w-6 h-6 sm:w-7 sm:h-7 text-gold" />
+                </div>
+                <h3 className="font-display text-lg sm:text-xl font-semibold text-foreground mb-3">
+                  {f.title}
+                </h3>
+                <p className="text-muted-foreground font-body text-sm sm:text-base leading-relaxed">
+                  {f.desc}
+                </p>
               </div>
-              <h3 className="font-display text-lg sm:text-xl font-semibold text-foreground mb-3">
-                {f.title}
-              </h3>
-              <p className="text-muted-foreground font-body text-sm sm:text-base leading-relaxed">
-                {f.desc}
-              </p>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         {/* Technical Excellence & Quick Facts */}
@@ -82,14 +105,7 @@ const FacilitiesSection = () => {
                 most complex events run smoothly without a single technical glitch.
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 md:gap-6">
-                {[
-                  { label: "Main Hall Area", value: "12,000 Sq. Ft." },
-                  { label: "Dining Area", value: "4000 Sq. Ft." },
-                  { label: "Kitchen Area", value: "2200 Sq. Ft." },
-                  { label: "AC Capacity", value: "150 Tons Total" },
-                  { label: "CCTV Cameras", value: "64 High-Res Units" },
-                  { label: "Generator Set", value: "2x 250 kVA Silent" },
-                ].map((spec) => (
+                {technicalExcellence.map((spec: any) => (
                   <div key={spec.label} className="border-l-2 border-gold pl-3 sm:pl-4 py-2">
                     <p className="text-[9px] sm:text-[10px] uppercase tracking-widest text-muted-foreground mb-1">
                       {spec.label}
@@ -107,12 +123,7 @@ const FacilitiesSection = () => {
 
               <h3 className="font-display text-xl sm:text-2xl font-bold text-gold mb-4 sm:mb-6">Facility Quick Facts</h3>
               <ul className="space-y-3 sm:space-y-4">
-                {[
-                  "Pillar-less hall for unobstructed 360° visibility",
-                  "Dedicated fire-safety systems with smoke detectors",
-                  "Eco-friendly rainwater harvesting setup",
-                  "Centrally located with easy highway access",
-                ].map((fact, i) => (
+                {specifications.map((fact: any, i: number) => (
                   <li key={i} className="flex items-start gap-2 sm:gap-3">
                     <div className="mt-1 w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-gold shrink-0" />
                     <p className="text-cream/80 font-body text-xs sm:text-sm leading-tight">

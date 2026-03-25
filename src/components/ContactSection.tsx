@@ -1,3 +1,4 @@
+import { useData } from "@/contexts/DataContext";
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -6,6 +7,7 @@ import { MapPin, Phone, Mail, Clock, Send } from "lucide-react";
 gsap.registerPlugin(ScrollTrigger);
 
 const ContactSection = () => {
+  const { contactInfo } = useData();
   const sectionRef = useRef<HTMLElement>(null);
   const [formData, setFormData] = useState({
     name: "", phone: "", email: "", event: "", date: "", message: "",
@@ -41,8 +43,8 @@ const ContactSection = () => {
       `*Event Date:* ${formData.date || "Not set"}%0A` +
       `*Message:* ${formData.message || "No additional message"}`;
 
-    const phoneNumber = "917304999009"; // Venue's WhatsApp number
-    const emailAddress = "info@sukhrupgarden.com";
+    const phoneNumber = contactInfo?.phone.replace(/\D/g, "") || "917304999009"; // Venue's WhatsApp number
+    const emailAddress = contactInfo?.email || "info@sukhrupgarden.com";
 
     // Primary action: Redirect to WhatsApp
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${messageText}`;
@@ -60,6 +62,13 @@ const ContactSection = () => {
   };
 
   const inputClasses = "w-full px-4 py-3 bg-background border border-border text-foreground font-body text-base focus:outline-none focus:border-gold transition-colors";
+
+  const contactItems = [
+    { icon: MapPin, label: "Address", value: contactInfo?.address || "In Front Of Bageti Ganapati Mandir, Haripur Sangli Road, Haripur, Sangli, Maharashtra 416415" },
+    { icon: Phone, label: "Phone", value: contactInfo?.phone || "+91 7304999009\n+91 6262429009" },
+    { icon: Mail, label: "Email", value: contactInfo?.email || "info@sukhrupgarden.com" },
+    { icon: Clock, label: "Office Hours", value: contactInfo?.timing || "Mon - Sun: 9:00 AM - 9:00 PM" },
+  ];
 
   return (
     <section id="contact" ref={sectionRef} className="section-padding bg-background">
@@ -83,12 +92,7 @@ const ContactSection = () => {
             </p>
 
             <div className="space-y-4 sm:space-y-6">
-              {[
-                { icon: MapPin, label: "Address", value: "In Front Of Bageti Ganapati Mandir, Haripur Sangli Road, Haripur, Sangli, Maharashtra 416415" },
-                { icon: Phone, label: "Phone", value: "+91 7304999009\n+91 6262429009" },
-                { icon: Mail, label: "Email", value: "info@sukhrupgarden.com" },
-                { icon: Clock, label: "Office Hours", value: "Mon - Sun: 9:00 AM - 9:00 PM" },
-              ].map((item) => (
+              {contactItems.map((item) => (
                 <div key={item.label} className="flex gap-3 sm:gap-4 items-start">
                   <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gold/10 rounded-full flex items-center justify-center flex-shrink-0">
                     <item.icon className="w-4 h-4 sm:w-5 sm:h-5 text-gold" />
@@ -187,7 +191,7 @@ const ContactSection = () => {
                 className={inputClasses + " resize-none px-3 sm:px-4 py-2 sm:py-3"}
               />
               <button type="submit" className="btn-gold w-full flex items-center justify-center gap-2 mt-2">
-                <Send size={14} sm:size={16} />
+                <Send className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                 Send Inquiry
               </button>
             </form>

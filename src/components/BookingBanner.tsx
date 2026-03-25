@@ -1,3 +1,4 @@
+import { useData } from "@/contexts/DataContext";
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -6,6 +7,7 @@ import { Phone, CalendarCheck } from "lucide-react";
 gsap.registerPlugin(ScrollTrigger);
 
 const BookingBanner = () => {
+  const { bookingInfo, contactInfo } = useData();
   const ref = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -28,22 +30,22 @@ const BookingBanner = () => {
       <div className="container mx-auto px-4 text-center banner-content relative z-10">
         <CalendarCheck className="w-10 h-10 text-royal mx-auto mb-4" />
         <h2 className="font-display text-3xl md:text-4xl font-bold text-royal mb-3">
-          Ready to Plan Your Dream Event?
+          {bookingInfo?.title || "Ready to Plan Your Dream Event?"}
         </h2>
         <p className="font-body text-royal/80 mb-8 max-w-xl mx-auto">
-          Contact us today to check availability and book your preferred dates.
-          Early booking discounts available!
+          {bookingInfo?.subtitle || "Contact us today to check availability and book your preferred dates."}
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <a href="#contact" className="btn-primary bg-royal text-cream hover:bg-primary">
-            Book Now
+          <a href={bookingInfo?.ctaLink || "#contact"} className="btn-primary bg-royal text-cream hover:bg-primary">
+            {bookingInfo?.ctaText || "Book Now"}
           </a>
           <a
-            href="tel:+917304999009"
+            href={`tel:${contactInfo?.phone.replace(/\s/g, "") || "+917304999009"}`}
             className="inline-flex items-center justify-center gap-2 px-8 py-3 border-2 border-royal text-royal font-body font-medium text-sm uppercase tracking-[0.15em] transition-all duration-300 hover:bg-royal hover:text-cream"
           >
             <Phone size={16} />
-            +91 73049 99009
+            {contactInfo?.phone || "+91 73049 99009"}
+
           </a>
         </div>
       </div>

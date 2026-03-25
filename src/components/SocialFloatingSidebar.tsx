@@ -16,7 +16,7 @@ const SocialFloatingSidebar = () => {
         <span className="absolute right-full mr-2 sm:mr-3 px-2 sm:px-3 py-1 bg-royal text-cream text-[9px] sm:text-[10px] uppercase tracking-widest rounded-sm whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none shadow-md">
           Facebook
         </span>
-        <Facebook size={18} sm:size={22} />
+        <Facebook className="w-[18px] h-[18px] sm:w-[22px] sm:h-[22px]" />
       </a>
       
       <a
@@ -29,7 +29,7 @@ const SocialFloatingSidebar = () => {
         <span className="absolute right-full mr-2 sm:mr-3 px-2 sm:px-3 py-1 bg-royal text-cream text-[9px] sm:text-[10px] uppercase tracking-widest rounded-sm whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none shadow-md">
           Instagram
         </span>
-        <Instagram size={18} sm:size={22} />
+        <Instagram className="w-[18px] h-[18px] sm:w-[22px] sm:h-[22px]" />
       </a>
       
       <a
@@ -42,7 +42,7 @@ const SocialFloatingSidebar = () => {
         <span className="absolute right-full mr-2 sm:mr-3 px-2 sm:px-3 py-1 bg-royal text-cream text-[9px] sm:text-[10px] uppercase tracking-widest rounded-sm whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none shadow-md">
           WhatsApp
         </span>
-        <MessageCircle size={18} sm:size={22} />
+        <MessageCircle className="w-[18px] h-[18px] sm:w-[22px] sm:h-[22px]" />
       </a>
     </div>
   );

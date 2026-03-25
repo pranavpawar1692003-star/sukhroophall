@@ -1,43 +1,18 @@
 import { useState, useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { X, ChevronLeft, ChevronRight } from "lucide-react";
-const hero1 = "https://lh3.googleusercontent.com/gps-cs-s/AHVAweq4SRh4A5G1dSQ3AjqBw-9C1Z5y7FE0nNLdHbIdPAWkXhC6Qkxk1ccBY-aP--eSqLV_7LKa3hKF0ASGIy7TTx5--8NSoJ_RkRStMiygL9xBU3zOmaelHKkvn-PUaEyGdRaATTs=w1600-h900-k-no";
-import hero2 from "@/assets/hero-2.jpg";
-import hero3 from "@/assets/hero-3.jpg";
-import gallery1 from "@/assets/gallery-1.jpg";
-import gallery2 from "@/assets/gallery-2.jpg";
-import gallery3 from "@/assets/gallery-3.jpg";
-import gallery4 from "@/assets/gallery-4.jpg";
-import gallery5 from "@/assets/gallery-5.jpg";
-import gallery6 from "@/assets/gallery-6.jpg";
-import structureFront from "@/assets/structure-front.jpg";
-import structurePerspective from "@/assets/structure-perspective.jpg";
-import structureSide from "@/assets/structure-side.jpg";
-import floorPlan from "@/assets/floor-plan.jpg";
-import sitePlan from "@/assets/site-plan.jpg";
-import weddingVideo from "@/assets/WhatsApp Video 2026-03-18 at 10.41.43 AM.mp4";
+import { X, ChevronLeft, ChevronRight, Video, Image as ImageIcon } from "lucide-react";
+import { useData } from "@/contexts/DataContext";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const images = [
-  { src: structureFront, label: "Main Entrance & Façade", type: "image" },
-  { src: structurePerspective, label: "Grand Architectural View", type: "image" },
-  { src: structureSide, label: "Hall Exterior Perspective", type: "image" },
-  { src: sitePlan, label: "Comprehensive Site Layout", type: "image" },
-  { src: floorPlan, label: "Second Floor Planning", type: "image" },
-  { src: hero2, label: "Wedding Stage & Interiors", type: "image" },
-  { src: hero1, label: "Grand Banquet Hall", type: "image" },
-  { src: gallery2, label: "Mandap Decoration", type: "image" },
-  { src: gallery3, label: "Venue Entrance Details", type: "image" },
-  { src: weddingVideo, label: "Wedding Celebration Video", type: "video" },
-];
-
 const GallerySection = () => {
+  const { galleryItems, loading } = useData();
   const [lightbox, setLightbox] = useState<number | null>(null);
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
+    if (galleryItems.length === 0) return;
     const ctx = gsap.context(() => {
       gsap.from(".section-header > *", {
         scrollTrigger: { trigger: ".section-header", start: "top 95%" },
@@ -45,11 +20,14 @@ const GallerySection = () => {
       });
       gsap.from(".gallery-item", {
         scrollTrigger: { trigger: ".gallery-grid", start: "top 95%" },
-        opacity: 0, y: 20, duration: 0.5, stagger: 0.05, clearProps: "all"
+        opacity: 0, scale: 0.95, duration: 0.5, stagger: 0.1, clearProps: "all"
       });
     }, sectionRef);
     return () => ctx.revert();
-  }, []);
+  }, [galleryItems.length]);
+
+  if (!loading && galleryItems.length === 0) return null;
+
 
   const openLightbox = (i: number) => {
     setLightbox(i);
@@ -63,8 +41,10 @@ const GallerySection = () => {
 
   const navigate = (dir: number) => {
     if (lightbox === null) return;
-    setLightbox((lightbox + dir + images.length) % images.length);
+    setLightbox((lightbox + dir + galleryItems.length) % galleryItems.length);
   };
+
+  const firstImage = galleryItems.find(item => item.type === "image")?.image || "";
 
   return (
     <section id="gallery" ref={sectionRef} className="section-padding bg-muted">
@@ -74,51 +54,49 @@ const GallerySection = () => {
           <h2 className="section-title mb-6 text-5xl md:text-6xl lg:text-7xl font-bold">Our Gallery</h2>
           <div className="gold-divider mb-10" />
           <p className="max-w-3xl mx-auto text-muted-foreground font-body leading-relaxed">
-            Step into our world of elegance and grandeur. Our gallery showcases the 
-            stunning transformations, architectural beauty, and heartfelt moments that 
+            Step into our world of elegance and grandeur. Our gallery showcases the
+            stunning transformations, architectural beauty, and heartfelt moments that
             define the Sukhrup Garden experience.
           </p>
         </div>
 
         <div className="gallery-grid grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
-          {images.map((item, i) => (
+          {galleryItems.map((item, i) => (
             <div
-              key={i}
+              key={item.id || i}
               onClick={() => openLightbox(i)}
-              className={`gallery-item relative overflow-hidden cursor-pointer group ${
-                item.type === "video" ? "col-span-2 sm:col-span-3" : i === 0 ? "sm:col-span-2 sm:row-span-2" : ""
-              }`}
+              className={`gallery-item relative overflow-hidden cursor-pointer group ${item.type === "video" ? "col-span-2 sm:col-span-3" : i === 0 ? "sm:col-span-2 sm:row-span-2" : ""
+                }`}
             >
               {item.type === "video" ? (
                 <div className="relative w-full">
                   <video
-                    src={item.src}
+                    src={item.image}
                     className="w-full h-48 sm:h-64 md:h-80 lg:h-96 object-cover rounded-lg"
-                    poster={gallery1}
+                    poster={firstImage || item.image}
                     muted
                     autoPlay
                     loop
                     playsInline
                   />
-                  <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/50 transition-all duration-300 flex items-end">
-                    <span className="text-cream font-body text-xs sm:text-sm uppercase tracking-wider p-3 sm:p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      {item.label}
-                    </span>
+                  <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/50 transition-all duration-300 flex items-center justify-center">
+                    <div className="w-12 h-12 rounded-full bg-gold/20 flex items-center justify-center scale-0 group-hover:scale-100 transition-transform duration-300">
+                      <Video className="text-gold w-6 h-6" />
+                    </div>
                   </div>
                 </div>
               ) : (
                 <>
                   <img
-                    src={item.src}
+                    src={item.image}
                     alt={item.label}
-                    className={`w-full object-cover transition-transform duration-500 group-hover:scale-110 ${
-                      i === 0 ? "h-full min-h-[200px] sm:min-h-[300px] md:min-h-[400px] lg:min-h-[500px]" : "h-32 sm:h-48 md:h-56"
-                    }`}
+                    className={`w-full object-cover transition-transform duration-500 group-hover:scale-110 ${i === 0 ? "h-full min-h-[200px] sm:min-h-[300px] md:min-h-[400px] lg:min-h-[500px]" : "h-32 sm:h-48 md:h-56"
+                      }`}
                   />
-                  <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/50 transition-all duration-300 flex items-end">
-                    <span className="text-cream font-body text-xs sm:text-sm uppercase tracking-wider p-2 sm:p-3 md:p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      {item.label}
-                    </span>
+                  <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/50 transition-all duration-300 flex items-center justify-center">
+                    <div className="w-10 h-10 rounded-full bg-gold/20 flex items-center justify-center scale-0 group-hover:scale-100 transition-transform duration-300">
+                      <ImageIcon className="text-gold w-5 h-5" />
+                    </div>
                   </div>
                 </>
               )}
@@ -134,20 +112,17 @@ const GallerySection = () => {
           onClick={closeLightbox}
         >
           <button onClick={closeLightbox} className="absolute top-4 sm:top-6 right-4 sm:right-6 text-cream/70 hover:text-gold">
-            <X size={24} sm:size={32} />
+            <X className="w-6 h-6 sm:w-8 sm:h-8" />
           </button>
-          {images[lightbox].type === "video" ? (
+          {galleryItems[lightbox].type === "video" ? (
             <div className="relative w-full max-w-5xl mx-2 sm:mx-4" onClick={(e) => e.stopPropagation()}>
               <video
-                src={images[lightbox].src}
+                src={galleryItems[lightbox].image}
                 controls
                 className="w-full rounded-lg shadow-2xl"
                 autoPlay
                 playsInline
               />
-              <p className="absolute bottom-4 sm:bottom-6 left-0 right-0 text-center text-cream font-body text-xs sm:text-sm uppercase tracking-wider">
-                {images[lightbox].label}
-              </p>
             </div>
           ) : (
             <>
@@ -155,11 +130,11 @@ const GallerySection = () => {
                 onClick={(e) => { e.stopPropagation(); navigate(-1); }}
                 className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 text-cream/70 hover:text-gold"
               >
-                <ChevronLeft size={24} sm:size={40} />
+                <ChevronLeft className="w-6 h-6 sm:w-10 sm:h-10" />
               </button>
               <img
-                src={images[lightbox].src}
-                alt={images[lightbox].label}
+                src={galleryItems[lightbox].image}
+                alt="Gallery"
                 className="max-w-[90vw] max-h-[80vh] sm:max-h-[85vh] object-contain rounded-lg"
                 onClick={(e) => e.stopPropagation()}
               />
@@ -167,11 +142,8 @@ const GallerySection = () => {
                 onClick={(e) => { e.stopPropagation(); navigate(1); }}
                 className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 text-cream/70 hover:text-gold"
               >
-                <ChevronRight size={24} sm:size={40} />
+                <ChevronRight className="w-6 h-6 sm:w-10 sm:h-10" />
               </button>
-              <p className="absolute bottom-4 sm:bottom-6 left-0 right-0 text-center text-cream font-body text-xs sm:text-sm uppercase tracking-wider">
-                {images[lightbox].label}
-              </p>
             </>
           )}
         </div>

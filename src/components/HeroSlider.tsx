@@ -1,35 +1,32 @@
 import { useState, useEffect, useRef } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import gsap from "gsap";
-const hero1 = "https://lh3.googleusercontent.com/gps-cs-s/AHVAweq4SRh4A5G1dSQ3AjqBw-9C1Z5y7FE0nNLdHbIdPAWkXhC6Qkxk1ccBY-aP--eSqLV_7LKa3hKF0ASGIy7TTx5--8NSoJ_RkRStMiygL9xBU3zOmaelHKkvn-PUaEyGdRaATTs=w1600-h900-k-no";
-import hero2 from "@/assets/hero-2.jpg";
-import hero3 from "@/assets/hero-3.jpg";
-
-const slides = [
-  {
-    image: hero1,
-    subtitle: "Welcome to",
-    title: "Sukhrup Garden",
-    description: "Where every celebration becomes an unforgettable experience",
-  },
-  {
-    image: hero2,
-    subtitle: "Exquisite",
-    title: "Wedding Celebrations",
-    description: "Create magical memories in our grand wedding halls",
-  },
-  {
-    image: hero3,
-    subtitle: "Enchanting",
-    title: "Outdoor Venues",
-    description: "Beautiful garden settings for your dream celebration",
-  },
-];
+import { useData } from "@/contexts/DataContext";
 
 const HeroSlider = () => {
+  const { heroSlides, loading } = useData();
   const [current, setCurrent] = useState(0);
   const textRef = useRef<HTMLDivElement>(null);
   const intervalRef = useRef<ReturnType<typeof setInterval>>();
+
+  const fallbackSlides = [
+    {
+      image: "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&q=80",
+      subtitle: "Welcome to",
+      title: "Sukhrup Garden",
+      description: "Where every celebration becomes an unforgettable experience",
+    },
+    {
+      image: "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&q=80",
+      subtitle: "Exquisite",
+      title: "Wedding Celebrations",
+      description: "Create magical memories in our grand wedding halls",
+    },
+  ];
+
+  const displaySlides = (heroSlides.length > 0 && heroSlides[0].id)
+    ? heroSlides
+    : (loading ? [] : fallbackSlides);
 
   const animateText = () => {
     if (!textRef.current) return;
@@ -42,33 +39,41 @@ const HeroSlider = () => {
   };
 
   useEffect(() => {
+    if (displaySlides.length === 0) return;
     animateText();
     intervalRef.current = setInterval(() => {
-      setCurrent((prev) => (prev + 1) % slides.length);
+      setCurrent((prev) => (prev + 1) % displaySlides.length);
     }, 6000);
     return () => clearInterval(intervalRef.current);
-  }, []);
+  }, [displaySlides.length]);
 
   useEffect(() => {
+    if (displaySlides.length === 0) return;
     animateText();
-  }, [current]);
+  }, [current, displaySlides.length]);
 
   const goTo = (index: number) => {
+    if (displaySlides.length === 0) return;
     setCurrent(index);
     clearInterval(intervalRef.current);
     intervalRef.current = setInterval(() => {
-      setCurrent((prev) => (prev + 1) % slides.length);
+      setCurrent((prev) => (prev + 1) % displaySlides.length);
     }, 6000);
   };
 
+  if (loading && heroSlides.length === 0) {
+    return <section id="home" className="h-screen bg-black" />;
+  }
+
+  if (displaySlides.length === 0) return null;
+
   return (
     <section id="home" className="relative h-screen overflow-hidden">
-      {slides.map((slide, i) => (
+      {displaySlides.map((slide, i) => (
         <div
           key={i}
-          className={`absolute inset-0 transition-opacity duration-1000 ${
-            i === current ? "opacity-100" : "opacity-0"
-          }`}
+          className={`absolute inset-0 transition-opacity duration-1000 ${i === current ? "opacity-100" : "opacity-0"
+            }`}
         >
           <img
             src={slide.image}
@@ -83,13 +88,13 @@ const HeroSlider = () => {
       <div className="absolute inset-0 flex items-center justify-center">
         <div ref={textRef} className="text-center px-4 max-w-4xl">
           <p className="!text-white text-sm md:text-base uppercase tracking-[0.4em] font-body mb-4">
-            {slides[current].subtitle}
+            {displaySlides[current]?.subtitle}
           </p>
           <h1 className="font-display text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold !text-white mb-6 leading-tight">
-            {slides[current].title}
+            {displaySlides[current]?.title}
           </h1>
           <p className="!text-white/80 font-body text-sm sm:text-base md:text-lg mb-10 max-w-2xl mx-auto">
-            {slides[current].description}
+            {displaySlides[current]?.description}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a href="#contact" className="btn-gold">
@@ -104,27 +109,26 @@ const HeroSlider = () => {
 
       {/* Arrows */}
       <button
-        onClick={() => goTo((current - 1 + slides.length) % slides.length)}
+        onClick={() => goTo((current - 1 + displaySlides.length) % displaySlides.length)}
         className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 text-cream/60 hover:text-gold transition-colors"
       >
-        <ChevronLeft size={24} sm:size={32} md:size={40} />
+        <ChevronLeft className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10" />
       </button>
       <button
-        onClick={() => goTo((current + 1) % slides.length)}
+        onClick={() => goTo((current + 1) % displaySlides.length)}
         className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 text-cream/60 hover:text-gold transition-colors"
       >
-        <ChevronRight size={24} sm:size={32} md:size={40} />
+        <ChevronRight className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10" />
       </button>
 
       {/* Dots */}
       <div className="absolute bottom-4 sm:bottom-6 md:bottom-8 left-1/2 -translate-x-1/2 flex gap-2 sm:gap-3">
-        {slides.map((_, i) => (
+        {displaySlides.map((_, i) => (
           <button
             key={i}
             onClick={() => goTo(i)}
-            className={`w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full transition-all duration-300 ${
-              i === current ? "bg-gold w-6 sm:w-8" : "bg-cream/40"
-            }`}
+            className={`w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full transition-all duration-300 ${i === current ? "bg-gold w-6 sm:w-8" : "bg-cream/40"
+              }`}
           />
         ))}
       </div>

@@ -79,7 +79,12 @@
     font-family: var(--font-body);
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     font-family: var(--font-display);
   }
 }
@@ -139,9 +144,11 @@ html {
 ::-webkit-scrollbar {
   width: 8px;
 }
+
 ::-webkit-scrollbar-track {
   background: hsl(var(--cream));
 }
+
 ::-webkit-scrollbar-thumb {
   background: hsl(var(--gold));
   border-radius: 4px;
