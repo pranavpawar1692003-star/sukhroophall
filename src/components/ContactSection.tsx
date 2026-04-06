@@ -10,7 +10,7 @@ const ContactSection = () => {
   const { contactInfo } = useData();
   const sectionRef = useRef<HTMLElement>(null);
   const [formData, setFormData] = useState({
-    name: "", phone: "", email: "", event: "", date: "", place: "", message: "",
+    name: "", phone: "", email: "", event: "", date: "", message: "",
   });
 
   useEffect(() => {
@@ -40,7 +40,6 @@ const ContactSection = () => {
       `*Phone:* ${formData.phone}%0A` +
       `*Email:* ${formData.email || "Not provided"}%0A` +
       `*Event Type:* ${formData.event || "Not specified"}%0A` +
-      `*Event Place:* ${formData.place || "Not specified"}%0A` +
       `*Event Date:* ${formData.date || "Not set"}%0A` +
       `*Message:* ${formData.message || "No additional message"}`;
 
@@ -59,7 +58,7 @@ const ContactSection = () => {
     window.open(whatsappUrl, "_blank");
 
     alert("Inquiry prepared! Opening WhatsApp to send your details. You can also contact us via email at " + emailAddress);
-    setFormData({ name: "", phone: "", email: "", event: "", date: "", place: "", message: "" });
+    setFormData({ name: "", phone: "", email: "", event: "", date: "", message: "" });
   };
 
   const inputClasses = "w-full px-4 py-3 bg-background border border-border text-foreground font-body text-base focus:outline-none focus:border-gold transition-colors";
@@ -75,7 +74,7 @@ const ContactSection = () => {
     <section id="contact" ref={sectionRef} className="section-padding bg-background relative overflow-hidden">
       {/* Decorative patterns */}
       <div className="absolute top-0 left-0 w-full h-1 bg-gold-gradient opacity-20" />
-      
+
       <div className="container mx-auto px-4 md:px-6">
         <div className="section-header text-center mb-10 md:mb-16">
           <p className="section-subtitle mb-3 text-base md:text-lg font-bold tracking-widest uppercase text-gold">Get In Touch</p>
@@ -106,11 +105,23 @@ const ContactSection = () => {
                     <p className="font-body text-xs sm:text-sm uppercase tracking-[0.2em] text-muted-foreground mb-2 font-semibold">
                       {item.label}
                     </p>
-                    <p className="font-body text-sm sm:text-base text-foreground whitespace-pre-line leading-relaxed">
-                      {item.label === "Phone" ? item.value.split(/[/,\n]/).map((n, i) => (
-                        <span key={i} className="block mb-1">{n.trim()}</span>
-                      )) : item.value}
-                    </p>
+                    <div className="font-body text-sm sm:text-base text-foreground leading-relaxed">
+                      {item.label === "Phone" ? (
+                        <div className="flex flex-col gap-1">
+                          {item.value.split(/[/,\n]/).map((n, i) => (
+                            <a key={i} href={`tel:${n.replace(/\D/g, "")}`} className="hover:text-gold transition-colors block">
+                              {n.trim()}
+                            </a>
+                          ))}
+                        </div>
+                      ) : item.label === "Email" ? (
+                        <a href={`mailto:${item.value}`} className="hover:text-gold transition-colors block">
+                          {item.value}
+                        </a>
+                      ) : (
+                        <p className="whitespace-pre-line">{item.value}</p>
+                      )}
+                    </div>
                   </div>
                 </div>
               ))}
@@ -144,7 +155,7 @@ const ContactSection = () => {
                   <label className="text-xs font-semibold uppercase tracking-wider text-muted-foreground ml-1">Name</label>
                   <input
                     type="text"
-                    placeholder="John Doe"
+                    placeholder="Enter Your Name"
                     required
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
@@ -176,7 +187,7 @@ const ContactSection = () => {
                 <label className="text-xs font-semibold uppercase tracking-wider text-muted-foreground ml-1">Email Address</label>
                 <input
                   type="email"
-                  placeholder="john@example.com"
+                  placeholder="Enter Your Email"
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                   className={inputClasses + " rounded-xl px-4 py-3 sm:py-4"}
@@ -201,25 +212,14 @@ const ContactSection = () => {
                   </select>
                 </div>
                 <div className="space-y-2">
-                  <label className="text-xs font-semibold uppercase tracking-wider text-muted-foreground ml-1">Event Place</label>
+                  <label className="text-xs font-semibold uppercase tracking-wider text-muted-foreground ml-1">Event Date</label>
                   <input
-                    type="text"
-                    placeholder="Venue/Location"
-                    value={formData.place}
-                    onChange={(e) => setFormData({ ...formData, place: e.target.value })}
-                    className={inputClasses + " rounded-xl px-4 py-3 sm:py-4"}
+                    type="date"
+                    value={formData.date}
+                    onChange={(e) => setFormData({ ...formData, date: e.target.value })}
+                    className={inputClasses + " rounded-xl px-4 py-3 sm:py-4 cursor-pointer"}
                   />
                 </div>
-              </div>
-
-              <div className="space-y-2">
-                <label className="text-xs font-semibold uppercase tracking-wider text-muted-foreground ml-1">Event Date</label>
-                <input
-                  type="date"
-                  value={formData.date}
-                  onChange={(e) => setFormData({ ...formData, date: e.target.value })}
-                  className={inputClasses + " rounded-xl px-4 py-3 sm:py-4 cursor-pointer"}
-                />
               </div>
 
               <div className="space-y-2">
