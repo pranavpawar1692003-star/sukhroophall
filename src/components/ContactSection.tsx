@@ -107,19 +107,23 @@ const ContactSection = () => {
                     </p>
                     <div className="font-body text-sm sm:text-base text-foreground leading-relaxed">
                       {item.label === "Phone" ? (
-                        <div className="flex flex-col gap-1">
-                          {item.value.split(/[/,\n]/).map((n, i) => (
-                            <a key={i} href={`tel:${n.replace(/\D/g, "")}`} className="hover:text-gold transition-colors block">
+                        <div className="space-y-1.5 flex flex-col">
+                          {item.value.split(/[/,\n|]/).map((n, i) => (
+                            <a 
+                              key={i} 
+                              href={`tel:${n.replace(/\D/g, "")}`} 
+                              className="hover:text-gold transition-colors block font-medium"
+                            >
                               {n.trim()}
                             </a>
                           ))}
                         </div>
                       ) : item.label === "Email" ? (
-                        <a href={`mailto:${item.value}`} className="hover:text-gold transition-colors block">
+                        <a href={`mailto:${item.value}`} className="hover:text-gold transition-colors block font-medium">
                           {item.value}
                         </a>
                       ) : (
-                        <p className="whitespace-pre-line">{item.value}</p>
+                        <p className="whitespace-pre-line leading-relaxed">{item.value}</p>
                       )}
                     </div>
                   </div>
