@@ -120,12 +120,13 @@ const AdminContact = () => {
       ) : (
         <div className="space-y-6">
           <div>
-            <label className="block text-sm text-cream/70 mb-2">Phone</label>
-            <input
-              type="tel"
+            <label className="block text-sm text-cream/70 mb-2">Phone Numbers (Use / or , to separate multiple numbers)</label>
+            <textarea
               value={formData.phone}
               onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
               className="w-full px-4 py-2 bg-white/10 border border-gold/30 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-gold/50"
+              rows={2}
+              placeholder="+91 9999999999 / +91 8888888888"
             />
           </div>
           <div>
