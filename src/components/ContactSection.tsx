@@ -107,19 +107,19 @@ const ContactSection = () => {
                     </p>
                     <div className="font-body text-sm sm:text-base text-foreground leading-relaxed">
                       {item.label === "Phone" ? (
-                        <div className="space-y-1.5 flex flex-col">
-                          {item.value.split(/[/,\n|]/).map((n, i) => (
+                        <div className="space-y-2 flex flex-col items-start">
+                          {item.value.split(/[/,\n|;&]|\s{2,}/).filter(n => n.trim().length > 5).map((n, i) => (
                             <a 
                               key={i} 
                               href={`tel:${n.replace(/\D/g, "")}`} 
-                              className="hover:text-gold transition-colors block font-medium"
+                              className="hover:text-gold transition-colors inline-block font-medium border-b border-transparent hover:border-gold pb-0.5"
                             >
                               {n.trim()}
                             </a>
                           ))}
                         </div>
                       ) : item.label === "Email" ? (
-                        <a href={`mailto:${item.value}`} className="hover:text-gold transition-colors block font-medium">
+                        <a href={`mailto:${item.value}`} className="hover:text-gold transition-colors inline-block font-medium border-b border-transparent hover:border-gold pb-0.5">
                           {item.value}
                         </a>
                       ) : (

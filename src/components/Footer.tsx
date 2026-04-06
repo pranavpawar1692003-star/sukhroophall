@@ -69,7 +69,7 @@ const Footer = () => {
             <h4 className="font-display text-lg font-semibold text-gold mb-4">Contact Info</h4>
             <ul className="space-y-3 font-body text-base text-cream/60">
               <li className="whitespace-pre-line">{contactInfo?.address || "Haripur Sangli Road, Haripur\nSangli, Maharashtra 416415"}</li>
-              <li>{contactInfo?.phone ? contactInfo.phone.split(/[/,\n]/).map((n, i) => (
+              <li>{contactInfo?.phone ? contactInfo.phone.split(/[/,\n|;&]|\s{2,}/).filter(n => n.trim().length > 5).map((n, i) => (
                 <span key={i} className="block">{n.trim()}</span>
               )) : "+91 7304999009"}</li>
               <li>{contactInfo?.email || "info@sukhrupgarden.com"}</li>
