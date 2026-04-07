@@ -83,8 +83,8 @@ const Footer = () => {
           <p className="font-body text-xs sm:text-sm text-cream/50 text-center md:text-left">
             © {new Date().getFullYear()} Sukhrup Garden. All rights reserved.
           </p>
-          <p className="font-body text-[9px] sm:text-[10px] uppercase tracking-[0.2em] text-gold/40 text-center md:text-right">
-            Developed by <span className="text-gold/60">Infoyashonand Technology Pvt Ltd</span>
+          <p className="font-body text-[9px] sm:text-[10px] uppercase tracking-[0.2em] text-white/50 text-center md:text-right">
+            Developed by <span className="text-white/80">Infoyashonand Technology Pvt Ltd</span>
           </p>
         </div>
       </div>
