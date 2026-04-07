@@ -7,7 +7,6 @@ import {
   Users, 
   Star, 
   MapPin, 
-  Calendar,
   Info,
   Utensils,
   Layout,
@@ -30,7 +29,6 @@ const AdminDashboard = () => {
     { id: "gallery", label: "Gallery", icon: Image },
     { id: "testimonials", label: "Testimonials", icon: Users },
     { id: "contact", label: "Contact Info", icon: MapPin },
-    { id: "booking", label: "Booking Banner", icon: Calendar },
   ];
 
   useEffect(() => {

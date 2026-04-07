@@ -78,7 +78,7 @@ const ContactSection = () => {
       <div className="container mx-auto px-4 md:px-6">
         <div className="section-header text-center mb-10 md:mb-16">
           <p className="section-subtitle mb-3 text-base md:text-lg font-bold tracking-widest uppercase text-gold">Get In Touch</p>
-          <h2 className="section-title mb-6 text-4xl md:text-5xl lg:text-7xl font-bold">
+          <h2 className="section-title mb-6 text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold">
             <span className="text-gold-gradient">Contact Us</span>
           </h2>
           <div className="gold-divider mx-auto" />
@@ -109,9 +109,9 @@ const ContactSection = () => {
                       {item.label === "Phone" ? (
                         <div className="space-y-2 flex flex-col items-start">
                           {item.value.split(/[/,\n|;&]|\s{2,}/).filter(n => n.trim().length > 5).map((n, i) => (
-                            <a 
-                              key={i} 
-                              href={`tel:${n.replace(/\D/g, "")}`} 
+                            <a
+                              key={i}
+                              href={`tel:${n.replace(/\D/g, "")}`}
                               className="hover:text-gold transition-colors inline-block font-medium border-b border-transparent hover:border-gold pb-0.5"
                             >
                               {n.trim()}

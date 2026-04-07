@@ -90,7 +90,7 @@ const HeroSlider = () => {
           <p className="!text-white text-sm md:text-base uppercase tracking-[0.4em] font-body mb-4">
             {displaySlides[current]?.subtitle}
           </p>
-          <h1 className="font-display text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold !text-white mb-6 leading-tight">
+          <h1 className="font-display text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-bold !text-white mb-6 leading-[1.1] sm:leading-tight">
             {displaySlides[current]?.title}
           </h1>
           <p className="!text-white/80 font-body text-sm sm:text-base md:text-lg mb-10 max-w-2xl mx-auto">

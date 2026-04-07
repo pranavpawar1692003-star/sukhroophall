@@ -65,7 +65,7 @@ const FacilitiesSection = () => {
       <div className="container mx-auto text-center">
         <div className="section-header mb-12">
           <p className="section-subtitle mb-3 text-lg md:text-xl font-bold">World-Class Amenities</p>
-          <h2 className="section-title mb-6 text-5xl md:text-6xl lg:text-7xl font-bold">Our Facilities</h2>
+          <h2 className="section-title mb-6 text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold">Our Facilities</h2>
           <div className="gold-divider mb-10" />
           <p className="max-w-3xl mx-auto text-muted-foreground font-body leading-relaxed">
             Experience the perfect blend of tradition and modernity. At Sukhrup Garden,
@@ -98,7 +98,7 @@ const FacilitiesSection = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 items-stretch text-left">
             <div className="bg-white/40 backdrop-blur-md p-6 sm:p-8 md:p-10 border border-gold/20 rounded-lg shadow-sm">
               <p className="section-subtitle mb-3 text-base sm:text-lg">Specifications</p>
-              <h2 className="section-title mb-6 text-3xl sm:text-4xl md:text-5xl">Technical Excellence</h2>
+              <h2 className="section-title mb-6 !text-3xl sm:!text-4xl md:!text-5xl">Technical Excellence</h2>
               <p className="text-muted-foreground font-body text-sm sm:text-base leading-relaxed mb-8">
                 Beyond the aesthetics, we take pride in our facility's technical superiority.
                 Our venue is engineered for large-scale logistics, ensuring that even the

@@ -15,7 +15,6 @@ import AdminServices from "./pages/admin/AdminServices";
 import AdminGallery from "./pages/admin/AdminGallery";
 import AdminTestimonials from "./pages/admin/AdminTestimonials";
 import AdminContact from "./pages/admin/AdminContact";
-import AdminBooking from "./pages/admin/AdminBooking";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import { AdminLoginRoute } from "./components/AdminLoginRoute";
 
@@ -58,7 +57,6 @@ const App = () => (
                 <Route path="gallery" element={<AdminGallery />} />
                 <Route path="testimonials" element={<AdminTestimonials />} />
                 <Route path="contact" element={<AdminContact />} />
-                <Route path="booking" element={<AdminBooking />} />
               </Route>
 
               {/* User Routes - Redirect all unknown to home */}

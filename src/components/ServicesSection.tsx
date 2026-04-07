@@ -62,7 +62,7 @@ const ServicesSection = () => {
       <div className="container mx-auto text-center">
         <div className="section-header mb-12 text-center">
           <p className="section-subtitle mb-3 text-lg md:text-xl font-bold">What We Offer</p>
-          <h2 className="section-title mb-6 text-5xl md:text-6xl lg:text-7xl font-bold">Our Services</h2>
+          <h2 className="section-title mb-6 text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold">Our Services</h2>
           <div className="gold-divider mb-10" />
           <p className="max-w-3xl mx-auto text-muted-foreground font-body leading-relaxed">
             From the first ritual to the final farewell, we provide end-to-end event management
