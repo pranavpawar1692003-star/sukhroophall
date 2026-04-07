@@ -78,11 +78,17 @@ const Footer = () => {
         </div>
       </div>
 
-      <div className="border-t border-gold/10 py-6">
-        <div className="container mx-auto px-4 flex flex-col md:flex-row items-center justify-center">
+      <div className="border-t border-gold/10 py-8">
+        <div className="container mx-auto px-4 flex flex-col items-center justify-center gap-4">
           <p className="font-body text-sm text-cream/50 text-center">
             © {new Date().getFullYear()} Sukhrup Garden. All rights reserved.
           </p>
+          <div className="flex flex-col items-center gap-2">
+            <span className="h-px w-8 bg-gold/20" />
+            <p className="font-body text-[10px] uppercase tracking-[0.25em] text-gold/40 text-center">
+              Developed by <span className="text-gold/60">Infoyashonand Technology Pvt Ltd</span>
+            </p>
+          </div>
         </div>
       </div>
     </footer>
