@@ -29,17 +29,17 @@ const FacilitiesSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
 
   const technicalExcellence = facilityExtras?.technicalExcellence || [
-    "Centralized VRF AC Systems",
-    "Professional Acoustic Treatment",
-    "Programmable LED Ambience",
-    "High-Resolution CCTV Matrix"
+    { label: "Main Hall Area", value: "12,000 Sq. Ft." },
+    { label: "Dining Area", value: "4000 Sq. Ft." },
+    { label: "Kitchen Area", value: "2200 Sq. Ft." },
+    { label: "AC Capacity", value: "150 Tons Total" },
   ];
 
   const specifications = facilityExtras?.specifications || [
-    "25,000 Sq. Ft. Operational Area",
-    "1,500 Guest Combined Capacity",
-    "200+ Vehicle Secured Parking",
-    "100% DG Set Power Backup"
+    "Pillar-less hall for unobstructed 360° visibility",
+    "Dedicated fire-safety systems with smoke detectors",
+    "Eco-friendly rainwater harvesting setup",
+    "Centrally located with easy highway access",
   ];
 
   useEffect(() => {
@@ -74,15 +74,15 @@ const FacilitiesSection = () => {
           </p>
         </div>
 
-        <div className="facility-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-12">
+        <div className="facility-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-8 mb-12 sm:mb-20">
           {facilities.map((f: any) => {
             const IconComponent = typeof f.icon === 'string' ? (iconMap[f.icon] || Info) : f.icon;
             return (
-              <div key={f.title} className="facility-card card-premium p-6 sm:p-8 text-left group">
-                <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-gold/10 flex items-center justify-center mb-4 sm:mb-5 group-hover:bg-gold/20 transition-colors duration-300">
-                  <IconComponent className="w-6 h-6 sm:w-7 sm:h-7 text-gold" />
+              <div key={f.title} className="facility-card card-premium p-6 sm:p-10 text-left group border-gold/10 hover:border-gold/30">
+                <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-gold/10 flex items-center justify-center mb-5 sm:mb-6 group-hover:bg-gold/20 transition-all duration-500">
+                  <IconComponent className="w-6 h-6 sm:w-8 sm:h-8 text-gold" />
                 </div>
-                <h3 className="font-display text-lg sm:text-xl font-semibold text-foreground mb-3">
+                <h3 className="font-display text-xl sm:text-2xl font-bold text-foreground mb-3 sm:mb-4">
                   {f.title}
                 </h3>
                 <p className="text-muted-foreground font-body text-sm sm:text-base leading-relaxed">
@@ -94,48 +94,48 @@ const FacilitiesSection = () => {
         </div>
 
         {/* Technical Excellence & Quick Facts */}
-        <div className="technical-content mt-12 py-8 sm:py-12 border-t border-gold/20">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 items-stretch text-left">
-            <div className="bg-white/40 backdrop-blur-md p-6 sm:p-8 md:p-10 border border-gold/20 rounded-lg shadow-sm">
-              <p className="section-subtitle mb-3 text-base sm:text-lg">Specifications</p>
-              <h2 className="section-title mb-6 !text-3xl sm:!text-4xl md:!text-5xl">Technical Excellence</h2>
-              <p className="text-muted-foreground font-body text-sm sm:text-base leading-relaxed mb-8">
+        <div className="technical-content mt-12 sm:mt-24 py-10 sm:py-20 border-t border-gold/20">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-10 lg:gap-16 items-stretch text-left">
+            <div className="bg-white/40 backdrop-blur-md p-6 sm:p-10 md:p-12 border border-gold/20 rounded-lg shadow-sm">
+              <p className="section-subtitle mb-2 text-sm sm:text-base">Specifications</p>
+              <h2 className="section-title mb-6 !text-3xl sm:!text-5xl md:!text-6xl">Technical Excellence</h2>
+              <p className="text-muted-foreground font-body text-sm sm:text-base leading-relaxed mb-8 sm:mb-12">
                 Beyond the aesthetics, we take pride in our facility's technical superiority.
                 Our venue is engineered for large-scale logistics, ensuring that even the
-                most complex events run smoothly without a single technical glitch.
+                most complex events run smoothly.
               </p>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 md:gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-8">
                 {technicalExcellence.map((spec: any) => (
-                  <div key={spec.label} className="border-l-2 border-gold pl-3 sm:pl-4 py-2">
-                    <p className="text-[9px] sm:text-[10px] uppercase tracking-widest text-muted-foreground mb-1">
+                  <div key={spec.label} className="border-l-2 border-gold pl-4 sm:pl-6 py-2">
+                    <p className="text-[10px] sm:text-xs uppercase tracking-widest text-muted-foreground mb-1 font-bold">
                       {spec.label}
                     </p>
-                    <p className="font-display text-lg sm:text-xl font-semibold text-foreground">
+                    <p className="font-display text-xl sm:text-2xl font-bold text-foreground">
                       {spec.value}
                     </p>
                   </div>
                 ))}
               </div>
             </div>
-            <div className="bg-royal p-6 sm:p-8 md:p-12 relative overflow-hidden group rounded-lg shadow-sm flex flex-col justify-center">
+            <div className="bg-royal p-8 sm:p-12 md:p-16 relative overflow-hidden group rounded-lg shadow-sm flex flex-col justify-center min-h-[400px]">
               {/* Decorative background flare */}
-              <div className="absolute top-0 right-0 w-24 h-24 sm:w-32 sm:h-32 bg-gold/10 blur-3xl rounded-full -mr-12 -mt-12 group-hover:bg-gold/20 transition-all duration-700" />
+              <div className="absolute top-0 right-0 w-32 h-32 sm:w-48 sm:h-48 bg-gold/10 blur-3xl rounded-full -mr-16 -mt-16 group-hover:bg-gold/20 transition-all duration-700" />
 
-              <h3 className="font-display text-xl sm:text-2xl font-bold text-gold mb-4 sm:mb-6">Facility Quick Facts</h3>
-              <ul className="space-y-3 sm:space-y-4">
+              <h3 className="font-display text-2xl sm:text-3xl font-bold text-gold mb-6 sm:mb-8">Facility Quick Facts</h3>
+              <ul className="space-y-4 sm:space-y-6">
                 {specifications.map((fact: any, i: number) => (
-                  <li key={i} className="flex items-start gap-2 sm:gap-3">
-                    <div className="mt-1 w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-gold shrink-0" />
-                    <p className="text-cream/80 font-body text-xs sm:text-sm leading-tight">
+                  <li key={i} className="flex items-start gap-3 sm:gap-4">
+                    <div className="mt-1.5 w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-gold shrink-0 shadow-[0_0_8px_rgba(212,175,55,0.5)]" />
+                    <p className="text-cream/90 font-body text-sm sm:text-base leading-relaxed">
                       {fact}
                     </p>
                   </li>
                 ))} 
               </ul>
-              <div className="mt-8 sm:mt-10">
+              <div className="mt-10 sm:mt-12">
                 <a
                   href="#contact"
-                  className="inline-block border-b-2 border-gold text-gold font-body text-xs uppercase tracking-[0.2em] font-bold pb-1 hover:text-white hover:border-white transition-all duration-300"
+                  className="inline-block border-b-2 border-gold text-gold font-body text-xs sm:text-sm uppercase tracking-[0.25em] font-bold pb-2 hover:text-white hover:border-white transition-all duration-300"
                 >
                   Request Floor Plan
                 </a>
@@ -149,4 +149,3 @@ const FacilitiesSection = () => {
 };
 
 export default FacilitiesSection;
-  

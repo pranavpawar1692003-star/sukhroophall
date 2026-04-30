@@ -31,7 +31,7 @@ const TestimonialsSection = () => {
       
       const animation = gsap.to(marquee, {
         x: -totalWidth,
-        duration: 40,
+        duration: 60, // Slower for better readability
         ease: "none",
         repeat: -1,
       });
@@ -64,9 +64,6 @@ const TestimonialsSection = () => {
       </div>
 
       <div className="relative w-full">
-        <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-maroon to-transparent z-10 hidden md:block" />
-        <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-maroon to-transparent z-10 hidden md:block" />
-
         <div 
           ref={marqueeRef}
           className="flex gap-4 sm:gap-6 md:gap-8 whitespace-nowrap will-change-transform"

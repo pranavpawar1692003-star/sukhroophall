@@ -14,6 +14,7 @@ export interface AboutContent {
   id?: string;
   title: string;
   description: string;
+  imageUrl?: string;
   stats: {
     icon: string;
     value: number;

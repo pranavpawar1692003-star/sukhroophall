@@ -60,19 +60,18 @@ const GallerySection = () => {
           </p>
         </div>
 
-        <div className="gallery-grid grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
+        <div className="columns-1 sm:columns-2 lg:columns-3 gap-4 space-y-4">
           {galleryItems.map((item, i) => (
             <div
               key={item.id || i}
               onClick={() => openLightbox(i)}
-              className={`gallery-item relative overflow-hidden cursor-pointer group ${item.type === "video" ? "col-span-2 sm:col-span-3" : i === 0 ? "sm:col-span-2 sm:row-span-2" : ""
-                }`}
+              className="break-inside-avoid gallery-item relative overflow-hidden cursor-pointer group rounded-xl border border-gold/10 bg-royal/5 hover:border-gold/30 transition-all duration-300"
             >
               {item.type === "video" ? (
                 <div className="relative w-full">
                   <video
                     src={item.image}
-                    className="w-full h-48 sm:h-64 md:h-80 lg:h-96 object-cover rounded-lg"
+                    className="w-full h-auto object-contain"
                     poster={firstImage || item.image}
                     muted
                     autoPlay
@@ -86,19 +85,18 @@ const GallerySection = () => {
                   </div>
                 </div>
               ) : (
-                <>
+                <div className="relative w-full">
                   <img
                     src={item.image}
-                    alt={item.label}
-                    className={`w-full object-cover transition-transform duration-500 group-hover:scale-110 ${i === 0 ? "h-full min-h-[200px] sm:min-h-[300px] md:min-h-[400px] lg:min-h-[500px]" : "h-32 sm:h-48 md:h-56"
-                      }`}
+                    alt={item.label || "Gallery Image"}
+                    className="w-full h-auto object-contain transition-transform duration-500 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/50 transition-all duration-300 flex items-center justify-center">
                     <div className="w-10 h-10 rounded-full bg-gold/20 flex items-center justify-center scale-0 group-hover:scale-100 transition-transform duration-300">
                       <ImageIcon className="text-gold w-5 h-5" />
                     </div>
                   </div>
-                </>
+                </div>
               )}
             </div>
           ))}

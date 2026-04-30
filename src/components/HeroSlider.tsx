@@ -68,7 +68,7 @@ const HeroSlider = () => {
   if (displaySlides.length === 0) return null;
 
   return (
-    <section id="home" className="relative h-screen overflow-hidden">
+    <section id="home" className="relative h-[100dvh] w-full overflow-hidden">
       {displaySlides.map((slide, i) => (
         <div
           key={i}
@@ -87,20 +87,20 @@ const HeroSlider = () => {
 
       <div className="absolute inset-0 flex items-center justify-center">
         <div ref={textRef} className="text-center px-4 max-w-4xl">
-          <p className="!text-white text-sm md:text-base uppercase tracking-[0.4em] font-body mb-4">
+          <p className="!text-white text-[10px] sm:text-xs md:text-sm lg:text-base uppercase tracking-[0.4em] font-body mb-3 sm:mb-4">
             {displaySlides[current]?.subtitle}
           </p>
-          <h1 className="font-display text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-bold !text-white mb-6 leading-[1.1] sm:leading-tight">
+          <h1 className="font-display text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold !text-white mb-4 sm:mb-6 leading-[1.1] sm:leading-tight">
             {displaySlides[current]?.title}
           </h1>
-          <p className="!text-white/80 font-body text-sm sm:text-base md:text-lg mb-10 max-w-2xl mx-auto">
+          <p className="!text-white/80 font-body text-xs sm:text-sm md:text-base lg:text-lg mb-8 sm:mb-10 max-w-2xl mx-auto px-2">
             {displaySlides[current]?.description}
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="#contact" className="btn-gold">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center">
+            <a href="#contact" className="btn-gold w-full sm:w-auto min-w-[160px] sm:min-w-[200px]">
               Book Your Event
             </a>
-            <a href="#gallery" className="btn-outline border-cream/40 text-cream hover:bg-cream/10 hover:text-cream">
+            <a href="#gallery" className="btn-outline w-full sm:w-auto min-w-[160px] sm:min-w-[200px] border-cream/40 text-cream hover:bg-cream/10 hover:text-cream">
               View Gallery
             </a>
           </div>

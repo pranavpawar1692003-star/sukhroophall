@@ -10,7 +10,7 @@ const firebaseConfig = {
   authDomain: "sukhroopgardan.firebaseapp.com",
   projectId: "sukhroopgardan",
   storageBucket: "sukhroopgardan.firebasestorage.app",
-  messagingSenderId: "204732843423",
+  messagingSenderId: "204732843423",  
   appId: "1:204732843423:web:4a7ce4d70e24da31f669aa",
   measurementId: "G-T1WFHD6B6K"
 };

@@ -18,8 +18,8 @@ const ServicesSection = () => {
     { image: "https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?auto=format&fit=crop&q=80", title: "Social Celebrations", desc: "From landmark birthdays to anniversary parties and baby showers, we create a joyful and vibrant atmosphere with themed decorations and gourmet catering tailored to your preference." },
   ];
 
-  const displayServices = (!loading && dynamicServices.length > 0 && dynamicServices[0].id) 
-    ? dynamicServices 
+  const displayServices = (!loading && dynamicServices.length > 0 && dynamicServices[0].id)
+    ? dynamicServices
     : (loading ? [] : fallbackServices);
 
   useEffect(() => {
@@ -39,19 +39,19 @@ const ServicesSection = () => {
 
   if (loading && dynamicServices.length === 0) {
     return (
-       <section id="services" className="section-padding bg-background">
-         <div className="container mx-auto">
-            <div className="animate-pulse flex flex-col items-center">
-               <div className="h-8 w-48 bg-gold/20 rounded mb-4"></div>
-               <div className="h-12 w-64 bg-primary/20 rounded mb-12"></div>
-               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 w-full">
-                  {[1,2,3].map(i => (
-                    <div key={i} className="h-64 bg-card border border-border rounded-xl"></div>
-                  ))}
-               </div>
+      <section id="services" className="section-padding bg-background">
+        <div className="container mx-auto">
+          <div className="animate-pulse flex flex-col items-center">
+            <div className="h-8 w-48 bg-gold/20 rounded mb-4"></div>
+            <div className="h-12 w-64 bg-primary/20 rounded mb-12"></div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 w-full">
+              {[1, 2, 3].map(i => (
+                <div key={i} className="h-64 bg-card border border-border rounded-xl"></div>
+              ))}
             </div>
-         </div>
-       </section>
+          </div>
+        </div>
+      </section>
     );
   }
 
@@ -73,14 +73,14 @@ const ServicesSection = () => {
 
         <div className="services-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {displayServices.map((s) => (
-            <div key={s.title} className="service-card card-premium group cursor-pointer">
-              <div className="relative overflow-hidden h-48 sm:h-56">
+            <div key={s.title} className="service-card card-premium group cursor-pointer h-full flex flex-col">
+              <div className="relative overflow-hidden aspect-video bg-royal/5 flex items-center justify-center border-b border-gold/10">
                 <img
                   src={s.image}
                   alt={s.title}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/40 transition-all duration-300" />
+                <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/30 transition-all duration-300" />
               </div>
               <div className="p-4 sm:p-6">
                 <h3 className="font-display text-lg sm:text-xl font-semibold text-foreground mb-2">

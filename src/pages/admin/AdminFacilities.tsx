@@ -162,8 +162,8 @@ const AdminFacilities = () => {
       <div className="space-y-6">
         <h3 className="font-display text-2xl font-bold text-gold border-b border-gold/20 pb-2">Core Facilities</h3>
         
-        {/* Seed Data Button (Only show if using fallback data) */}
-        {facilities.length > 0 && !facilities[0].id && (
+        {/* Seed Data Button (Show if using fallback data or empty) */}
+        {(facilities.length === 0 || !facilities[0]?.id) && (
           <div className="bg-gold/10 border border-gold/30 rounded-lg p-6 flex items-center justify-between">
             <div>
               <h3 className="font-display text-lg font-bold text-gold">Template Data Active</h3>
@@ -240,10 +240,10 @@ const AdminFacilities = () => {
 
         {/* List of facilities */}
         <div className="space-y-4">
-          {facilities.map((facility) => {
+          {facilities.map((facility, i) => {
             const IconComponent = iconMap[facility.icon] || Info;
             return (
-              <div key={facility.id || facility.title} className="bg-white/5 border border-gold/20 rounded-lg p-4">
+              <div key={facility.id || `fallback-${i}`} className="bg-white/5 border border-gold/20 rounded-lg p-4">
                 {editingId === facility.id ? (
                   <div className="space-y-3">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-3">

@@ -75,65 +75,63 @@ const AboutSection = () => {
   return (
     <section id="about" ref={sectionRef} className="section-padding bg-background">
       <div className="container mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 xl:gap-20 items-center">
-          <div className="about-content">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 xl:gap-24 items-center">
+          <div className="about-content order-2 lg:order-1">
             <div className="section-header">
-              <p className="section-subtitle mb-3 text-base sm:text-lg md:text-xl font-bold">About Sukhrup Garden</p>
-              <h2 className="section-title mb-6 text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold">
+              <p className="section-subtitle mb-2 text-sm sm:text-base md:text-lg font-bold">About Sukhrup Garden</p>
+              <h2 className="section-title mb-5 text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold">
                 {aboutContent?.title || "A Legacy of Grandeur"}
               </h2>
             </div>
             <div className="gold-divider !mx-0 mb-6 sm:mb-8" />
 
             {aboutContent?.description ? (
-              <div className="space-y-4 sm:space-y-6">
+              <div className="space-y-4 sm:space-y-5">
                 {aboutContent.description.split('\n').filter(p => p.trim() !== '').map((para, i) => (
-                  <p key={i} className="text-muted-foreground font-body leading-relaxed">
+                  <p key={i} className="text-muted-foreground font-body text-sm sm:text-base leading-relaxed">
                     {para}
                   </p>
                 ))}
               </div>
             ) : (
               <>
-                <p className="text-muted-foreground font-body leading-relaxed mb-4 sm:mb-6">
+                <p className="text-muted-foreground font-body text-sm sm:text-base leading-relaxed mb-4 sm:mb-5">
                   Founded on the principles of hospitality and heritage, Sukhrup Garden has stood as a
                   beacon of celebration for 24 years. We don't just provide a venue; we provide a
                   canvas where your most cherished dreams are painted with strokes of elegance and tradition.
-                  Our legacy is built on thousands of successful stories and a reputation for unmatched
-                  excellence in every detail.
                 </p>
-                <p className="about-text text-muted-foreground font-body leading-relaxed">
+                <p className="about-text text-muted-foreground font-body text-sm sm:text-base leading-relaxed">
                   Our architectural design seamlessly blends the timeless charm of traditional Indian
-                  aesthetics with the sophisticated requirements of modern luxury. Every corner...
+                  aesthetics with the sophisticated requirements of modern luxury.
                 </p>
               </>
             )}
           </div>
           <div className="about-image relative">
             <img
-              src={mainImage}
+              src={aboutContent?.imageUrl || mainImage}
               alt="Sukhrup Garden Grand Hall"
-              className="w-full h-64 sm:h-80 md:h-[300px] lg:h-[500px] object-cover shadow-[var(--shadow-elegant)]"
+              className="w-full h-auto object-contain shadow-[var(--shadow-elegant)] rounded-lg"
             />
-            <div className="absolute -bottom-4 -left-4 w-32 h-32 sm:w-48 sm:h-48 border-2 border-gold/30 hidden lg:block" />
-            <div className="absolute -top-4 -right-4 w-32 h-32 sm:w-48 sm:h-48 border-2 border-gold/30 hidden lg:block" />
+            <div className="absolute -bottom-4 -left-4 w-32 h-32 sm:w-48 sm:h-48 border-2 border-gold/30 hidden xl:block -z-10" />
+            <div className="absolute -top-4 -right-4 w-32 h-32 sm:w-48 sm:h-48 border-2 border-gold/30 hidden xl:block -z-10" />
           </div>
         </div>
 
         {/* Stats */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mt-12 sm:mt-20">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8 mt-12 sm:mt-16 md:mt-24">
           {displayStats.map((stat) => {
             const IconComponent = iconMap[stat.icon] || Calendar;
             return (
               <div
                 key={stat.label}
-                className="stat-card text-center p-4 sm:p-6 bg-card border border-border rounded-sm"
+                className="stat-card text-center p-5 sm:p-8 bg-card border border-border rounded-sm hover:border-gold/30 transition-colors"
               >
-                <IconComponent className="w-6 h-6 sm:w-8 sm:h-8 text-gold mx-auto mb-2 sm:mb-3" />
-                <div className="font-display text-2xl sm:text-3xl md:text-4xl font-bold text-primary mb-1">
+                <IconComponent className="w-6 h-6 sm:w-8 sm:h-8 text-gold mx-auto mb-3" />
+                <div className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-primary mb-1">
                   <span className="stat-number" data-target={stat.value}>{stat.value}</span>{stat.suffix}
                 </div>
-                <div className="text-xs sm:text-sm font-semibold uppercase tracking-[0.15em] text-muted-foreground font-body">
+                <div className="text-[10px] sm:text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground font-body">
                   {stat.label}
                 </div>
               </div>
